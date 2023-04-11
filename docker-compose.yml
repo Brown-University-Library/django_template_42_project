@@ -1,0 +1,22 @@
+version: "3.9"
+   
+services:
+  web:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: django_template_42_project-web-container
+    volumes:
+      - ../:/django_template_4p2_stuff
+      - ../DBs:/django_template_4p2_stuff/DBs
+      - ../logs:/django_template_4p2_stuff/logs
+      - .:/django_template_4p2_stuff/code
+    ports:
+      - "8000:8000"
+
+    environment:
+      - DJ_TMPLT42__ENV_SETTINGS_PATH=config/settings_localdev_env.sh
+
+    env_file: ./config/settings_localdev_env.sh
+
+    command: /bin/bash -c "python manage.py runserver 0.0.0.0:8000"
