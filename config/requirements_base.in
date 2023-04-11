@@ -1,0 +1,4 @@
+Django==4.2
+git+https://github.com/birkin/shellvars-py.git
+pip-tools==6.13.0
+trio==0.22.0
