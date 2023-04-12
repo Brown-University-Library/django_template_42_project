@@ -5,7 +5,7 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile
-    container_name: django_template_42_project-web-container
+    container_name: django_template_4p2_stuff-web-container
     volumes:
       - ../:/django_template_4p2_stuff
       - ../DBs:/django_template_4p2_stuff/DBs

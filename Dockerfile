@@ -8,10 +8,10 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
 ## who doesn't love a "stuff" directory!  :)
-WORKDIR /x_project_stuff/code
-RUN mkdir /x_project_stuff/logs
-RUN mkdir /x_project_stuff/DBs
+WORKDIR /django_template_4p2_stuff/code
+RUN mkdir /django_template_4p2_stuff/logs
+RUN mkdir /django_template_4p2_stuff/DBs
 
 ## set up the python environment
-COPY ./config/requirements.txt /x_project_stuff/code/
+COPY ./config/requirements.txt /django_template_4p2_stuff/code/
 RUN pip install -r ./requirements.txt
