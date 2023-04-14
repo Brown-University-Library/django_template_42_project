@@ -7,15 +7,16 @@ services:
       dockerfile: Dockerfile
     container_name: django_template_4p2_stuff-web-container
     volumes:
-      - ../:/django_template_4p2_stuff
-      - ../DBs:/django_template_4p2_stuff/DBs
-      - ../logs:/django_template_4p2_stuff/logs
-      - .:/django_template_4p2_stuff/code
+      - ../:/container_project_stuff
+      - ../DBs:/container_project_stuff/DBs
+      - ../logs:/container_project_stuff/logs
+      - .:/container_project_stuff/x_project_code
+      # - .:/container_project_stuff/code
     ports:
       - "8000:8000"
 
     environment:
-      - DJ_TMPLT42__ENV_SETTINGS_PATH=config/settings_localdev_env.sh
+      - XPRJCT_42__ENV_SETTINGS_PATH=config/settings_localdev_env.sh
 
     env_file: ./config/settings_localdev_env.sh
 
