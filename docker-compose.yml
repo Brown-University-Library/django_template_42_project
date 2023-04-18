@@ -10,8 +10,7 @@ services:
       - ../:/container_project_stuff
       - ../DBs:/container_project_stuff/DBs
       - ../logs:/container_project_stuff/logs
-      - .:/container_project_stuff/x_project_code
-      # - .:/container_project_stuff/code
+      - .:/container_project_stuff/x_project
     ports:
       - "8000:8000"
 

@@ -8,10 +8,10 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
 ## who doesn't love a "stuff" directory!  :)
-WORKDIR /container_project_stuff/x_project_code
+WORKDIR /container_project_stuff/x_project
 RUN mkdir /container_project_stuff/logs
 RUN mkdir /container_project_stuff/DBs
 
 ## set up the python environment
-COPY . /container_project_stuff/x_project_code/
+COPY . /container_project_stuff/x_project/
 RUN pip install -r ./config/requirements_localdev.txt 
