@@ -28,7 +28,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ[ 'XPRJCT_42__SECRET_KEY' ]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = json.loads( os.environ['XPRJCT_42__DEBUG_JSON'] )
+
+ADMINS = json.loads( os.environ['XPRJCT_42__ADMINS_JSON'] )
 
 ALLOWED_HOSTS = []
 
@@ -123,6 +126,12 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+
+# Email
+SERVER_EMAIL = os.environ['XPRJCT_42__SERVER_EMAIL']
+EMAIL_HOST = os.environ['XPRJCT_42__EMAIL_HOST']
+EMAIL_PORT = int( os.environ['XPRJCT_42__EMAIL_PORT'] )
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
