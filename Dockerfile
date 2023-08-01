@@ -1,17 +1,29 @@
-## syntax=docker/dockerfile:1
+# syntax=docker/dockerfile:1
 
-## load python 3.8
+## Note: best-practice for comments in a Dockerfile is _not_ to have them inline with commands.
+
+## specifies base-image; Docker will pull this image from Docker Hub if it's not already locally available
 FROM python:3.8
 
-## the tutorials include these; todo- figure out what they do
-ENV PYTHONDONTWRITEBYTECODE=1
+## prevents python from writing pyc files to disc (was in tutorial)
+ENV PYTHONDONTWRITEBYTECODE=1  
+
+## prevents python from buffering stdout and stderr (forces it to print everything immediately) (was in tutorial)
 ENV PYTHONUNBUFFERED=1
 
-## who doesn't love a "stuff" directory!  :)
+## sets the working directory inside your container 
+##  - if it doesn't exist, Docker will create it. 
+##  - all RUN commands that follow will be run from this directory.
 WORKDIR /container_project_stuff/x_project
-RUN mkdir /container_project_stuff/logs
-RUN mkdir /container_project_stuff/DBs
 
-## set up the python environment
+## creates a 'logs' directory within the container
+RUN mkdir /container_project_stuff/logs
+
+## creates an 'example_data_source' directory within the container
+RUN mkdir /container_project_stuff/example_data_source
+
+## copies the contents of the current host directory (x_project) into the container at /container_project_stuff/x_project
 COPY . /container_project_stuff/x_project/
+
+## runs the pip install command inside the container
 RUN pip install -r ./config/requirements_localdev.txt 

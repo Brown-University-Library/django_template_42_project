@@ -1,4 +1,6 @@
-version: "3.9"
+version: "3.8"
+## Specifies the version of the Compose file-format; must be compatible with the version of the Docker Engine.
+## See: https://docs.docker.com/compose/compose-file/compose-versioning/
    
 services:
   web:
@@ -7,10 +9,10 @@ services:
       dockerfile: Dockerfile
     container_name: django_template_4p2_stuff-web-container
     volumes:
-      - ../:/container_project_stuff
-      - ../DBs:/container_project_stuff/DBs
-      - ../logs:/container_project_stuff/logs
-      - .:/container_project_stuff/x_project
+      - ../:/container_project_stuff            # maps the 'stuff' parent-directory on the host to '/container_project_stuff' in the Docker container.
+      - ../DBs:/container_project_stuff/DBs     # maps the 'DBs' sub-directory from the parent-directory on the host to '/container_project_stuff/DBs' in the Docker container.
+      - ../logs:/container_project_stuff/logs   # maps the 'logs' sub-directory from the parent-directory on the host to '/container_project_stuff/logs' in the Docker container.
+      - .:/container_project_stuff/x_project    # maps the current-directory on the host to '/container_project_stuff/x_project' in the Docker container.
     ports:
       - "8000:8000"
 
