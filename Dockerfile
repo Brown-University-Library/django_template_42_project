@@ -22,7 +22,7 @@ RUN mkdir /container_project_stuff/logs
 ## creates an 'example_data_source' directory within the container
 RUN mkdir /container_project_stuff/example_data_source
 
-## copies the contents of the current host directory (x_project) into the container at /container_project_stuff/x_project
+## copies the contents of the current host directory (django_template_42_project) into the container at /container_project_stuff/x_project
 COPY . /container_project_stuff/x_project/
 
 ## runs the pip install command inside the container
