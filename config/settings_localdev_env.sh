@@ -9,6 +9,10 @@
 ## When deploying on our servers, copy this file to the appropriate place, edit it, 
 ## ...and point to it from activate and the apache <Location> entry.
 
+## clear out existing envars --------------------------------------------------
+for var in $(env | grep XPRJCT_42__ | cut -d= -f1); do
+    unset $var
+done
 
 ## ============================================================================
 ## standard project-level settings
