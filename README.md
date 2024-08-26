@@ -6,12 +6,16 @@ Template for new django projects.
 # local-install
 
 ```
-$ mdir ./foo_stuff_directory   # doesn't matter what it's named
+$ mkdir ./foo_stuff_directory   # doesn't matter what it's named
 $ cd ./foo_stuff_directory/
+$ mkdir ./logs
+$ mkdir ./DBs
 $ /path/to/python3.8 -m venv ./venv
-(venv) $ git clone git@github.com:birkin/django_template_42_project.git ./foo_project
-(venv) $ cd ./foo_project/
-(venv) $ pip install -r ./config/requirements/base.txt
+$ git clone git@github.com:birkin/django_template_42_project.git ./foo_project
+$ cd ./foo_project/
+$ cp ./config/dotenv_example_file.txt ../.env
+$ source ../venv/bin/activate
+(venv) $ pip install -r ./config/requirements/requirements_base.txt
 (venv) $ python ./manage.py runserver
 ```
 
