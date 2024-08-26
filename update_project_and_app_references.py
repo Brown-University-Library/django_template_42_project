@@ -10,7 +10,7 @@ import argparse
 from pathlib import Path, PosixPath
 
 
-## Constants --------------------------------------------------------
+## constants --------------------------------------------------------
 OLD_PROJECT_NAME = 'foo_project'
 OLD_APP_NAME = 'foo_app'
 
@@ -94,6 +94,7 @@ def parse_args() -> None:
     run_updater( target_directory, new_project_name, new_app_name )
     return
 
+
 def run_updater( target_directory: Path, new_project_name: str, new_app_name: str ) -> None:
     """ Performs the update operations on the target directory. 
         Called by parse_args. """
@@ -109,6 +110,6 @@ def run_updater( target_directory: Path, new_project_name: str, new_app_name: st
     return
 
 
-## dundermain
+## dundermain -------------------------------------------------------
 if __name__ == '__main__':
     parse_args()
