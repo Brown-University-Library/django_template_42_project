@@ -12,6 +12,24 @@ from pathlib import Path, PosixPath
 
 ## helper functions -------------------------------------------------
 
+
+def rename_top_level_directory(
+        target_directory: Path, 
+        old_project_name: str, 
+        new_project_name: str ) -> Path:
+    """ Renames the top-level project directory if needed.
+        Called by run_updater(). """
+    if old_project_name in target_directory.name:
+        new_directory: Path = target_directory.with_name(
+            target_directory.name.replace(old_project_name, new_project_name)
+        )
+        target_directory.rename( new_directory )
+        return_dir: Path = new_directory
+    else:
+        return_dir: Path = target_directory
+    return return_dir
+
+
 def rename_files_and_directories(
         target_directory: Path, 
         old_project_name: str, 
@@ -93,6 +111,10 @@ def run_updater(
         old_app_name, new_app_name: str ) -> None:
     """ Performs the update operations on the target directory. 
         Called by parse_args. """
+    ## rename top-level directory if needed
+    target_directory = rename_top_level_directory(
+        target_directory, old_project_name, new_project_name
+    )
     ## first pass: rename files and directories
     rename_files_and_directories(
         target_directory, 
