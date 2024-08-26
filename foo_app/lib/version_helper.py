@@ -1,4 +1,4 @@
-import datetime, json, logging, os, pprint, subprocess
+import datetime, json, logging, os, pathlib, pprint, subprocess
 
 import trio
 from django.conf import settings
@@ -28,11 +28,15 @@ def make_context( request, rq_now, info_txt ):
 
 
 class GatherCommitAndBranchData:
+    """
+    Note: 
+    - Originally this class made two separate asyncronous subprocess calls to git.
+    - Now it reads the `.git/HEAD` file to get the commit and branch data, so it doesn't need to be asyncronous.
+    """
 
     def __init__( self ):
         self.commit_data = ''
         self.branch_data = ''
-        # self.results_dct = {}
 
     async def manage_git_calls( self ):
         """ Triggers calling subprocess commands concurrently.
@@ -45,39 +49,41 @@ class GatherCommitAndBranchData:
         log.debug( f'final results_holder_dct, ```{pprint.pformat(results_holder_dct)}```' )
         self.commit = results_holder_dct['commit']
         self.branch = results_holder_dct['branch']
+        log.debug( f'self.branch, ``{self.branch}``' )
         return
 
-    async def fetch_commit_data( self, results_holder_dct ):
-        """ Fetches commit-data.
+    async def fetch_commit_data(self, results_holder_dct):
+        """ Fetches commit-data by reading the `.git/HEAD` file (avoiding calling git via subprocess due to user issue).
             Called by manage_git_calls() """
-        log.debug( 'fetch_commit_data' )
-        original_directory = os.getcwd()
-        git_dir = settings.BASE_DIR
-        os.chdir( git_dir )
-        output_obj: subprocess.CompletedProcess = await trio.run_process( ['git', 'log'], capture_stdout=True )
-        output: str = output_obj.stdout.decode( 'utf-8' )
-        os.chdir( original_directory )
-        lines = output.split( '\n' )
-        commit = lines[0]
+        log.debug('fetch_commit_data')
+        git_dir = pathlib.Path( settings.BASE_DIR ) / '.git'
+        ## read the HEAD file to find the current branch ------------
+        head_file: pathlib.Path = git_dir / 'HEAD'
+        ref_line: str = head_file.read_text().strip()
+        if ref_line.startswith('ref:'):
+            ref_path = ref_line.split(' ')[1]  # extract the ref path
+            commit_file: pathlib.Path = git_dir / ref_path
+            commit: str = commit_file.read_text().strip()
+        else:  #if it's a detached HEAD, the commit hash is directly in the HEAD file
+            commit: str = ref_line
+        log.debug( f'commit, ``{commit}``' )
+        ## update holder --------------------------------------------
         results_holder_dct['commit'] = commit
         return
 
-    async def fetch_branch_data( self, results_holder_dct ):
-        """ Fetches branch-data.
+    async def fetch_branch_data(self, results_holder_dct):
+        """ Fetches branch-data by reading the `.git/HEAD` file (avoiding calling git via subprocess due to user issue).
             Called by manage_git_calls() """
-        log.debug( 'fetch_branch_data' )
-        original_directory = os.getcwd()
-        git_dir = settings.BASE_DIR
-        os.chdir( git_dir )
-        output_obj: subprocess.CompletedProcess = await trio.run_process( ['git', 'branch'], capture_stdout=True )
-        output: str = output_obj.stdout.decode( 'utf-8' )
-        os.chdir( original_directory )
-        lines = output.split( '\n' )
-        branch = 'init'
-        for line in lines:
-            if line[0:1] == '*':
-                branch = line[2:]
-                break
+        log.debug('fetch_branch_data')
+        git_dir = pathlib.Path(settings.BASE_DIR) / '.git'
+        ## read the HEAD file to find the current branch ------------
+        head_file = git_dir / 'HEAD'
+        ref_line = head_file.read_text().strip()
+        if ref_line.startswith('ref:'):
+            branch = ref_line.split('/')[-1]  # extract the branch name
+        else:
+            branch = 'detached'
+        ## update holder --------------------------------------------
         results_holder_dct['branch'] = branch
         return
 

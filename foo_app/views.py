@@ -48,7 +48,7 @@ def version( request ):
     trio.run( gatherer.manage_git_calls )
     commit = gatherer.commit
     branch = gatherer.branch
-    info_txt = commit.replace( 'commit', branch )
+    info_txt = f'{branch} {commit}'
     context = version_helper.make_context( request, rq_now, info_txt )
     output = json.dumps( context, sort_keys=True, indent=2 )
     log.debug( f'output, ``{output}``' )
