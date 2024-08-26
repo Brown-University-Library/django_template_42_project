@@ -7,7 +7,7 @@ $ python ./update_project_and_app_references.py --target_dir "/path/to/foo_proje
 """
 
 import argparse
-from pathlib import Path
+from pathlib import Path, PosixPath
 
 
 ## helper functions -------------------------------------------------
@@ -21,7 +21,7 @@ def rename_files_and_directories(
     """ Renames any files and directories in the target directory. 
         Called by run_updater. """
     for item in target_directory.rglob( '*' ):
-        assert type(item) == Path
+        assert type(item) == PosixPath
         if item.is_dir():
             if old_project_name in item.name:
                 new_dir_name: str = item.name.replace( old_project_name, new_project_name )
@@ -45,7 +45,7 @@ def update_file_contents(
         old_app_name: str, 
         new_app_name: str ) -> None:
     for item in target_directory.rglob( '*' ):
-        assert type(item) == Path
+        assert type(item) == PosixPath
         if item.is_file():
             replace_in_file( item, old_project_name, new_project_name )
             replace_in_file( item, old_app_name, new_app_name )
