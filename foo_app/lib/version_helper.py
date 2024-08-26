@@ -45,6 +45,7 @@ class GatherCommitAndBranchData:
         log.debug( f'final results_holder_dct, ```{pprint.pformat(results_holder_dct)}```' )
         self.commit = results_holder_dct['commit']
         self.branch = results_holder_dct['branch']
+        log.debug( f'self.branch, ``{self.branch}``' )
         return
 
     async def fetch_commit_data(self, results_holder_dct):
@@ -61,6 +62,7 @@ class GatherCommitAndBranchData:
             commit: str = commit_file.read_text().strip()
         else:  #if it's a detached HEAD, the commit hash is directly in the HEAD file
             commit: str = ref_line
+        log.debug( f'commit, ``{commit}``' )
         ## update holder --------------------------------------------
         results_holder_dct['commit'] = commit
         return
@@ -96,7 +98,9 @@ class GatherCommitAndBranchData:
             if line[0:1] == '*':
                 branch = line[2:]
                 break
+        log.debug( f'branch, ``{branch}``' )
         results_holder_dct['branch'] = branch
+        log.debug( f'results_holder_dct with branch, ``{pprint.pformat(results_holder_dct)}``' )
         return
 
 ## end class GatherCommitAndBranchData
