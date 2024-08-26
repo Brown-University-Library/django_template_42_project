@@ -4,6 +4,9 @@ Purpose:
 
 Usage:
 $ python ./update_project_and_app_references.py --target_dir "/path/to/foo_project/" --new_project_name bar_project --new_app_name bar_app 
+
+Note: 
+- This script will delete the git-cloned `.git` directory in the target directory, so you can start a new git repository.
 """
 
 import argparse
