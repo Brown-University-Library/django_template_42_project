@@ -17,7 +17,10 @@ $ mkdir ./DBs
 $ /path/to/python3.8 -m venv ./venv
 $ git clone git@github.com:birkin/django_template_42_project.git ./x_project
 $ cd ./x_project/
-$ python ./update_project_and_app_references.py --target_dir "/full/path/to/x_project/" --new_project_name x_project --new_app_name x_app  # all on one line
+
+## the line below is a single command, all on one line (clarifying in case it wraps)
+$ python ./update_project_and_app_references.py --target_dir "/full/path/to/x_project/" --new_project_name x_project --new_app_name x_app  
+
 $ cp ./config/dotenv_example_file.txt ../.env
 $ source ../venv/bin/activate
 (venv) $ pip install -r ./config/requirements/requirements_base.txt
