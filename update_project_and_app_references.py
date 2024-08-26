@@ -9,7 +9,7 @@ Note:
 - This script will delete the git-cloned `.git` directory in the target directory, so you can start a new git repository.
 """
 
-import argparse
+import argparse, shutil
 from pathlib import Path, PosixPath
 
 
@@ -77,6 +77,16 @@ def replace_in_file( file_path: Path, old_text: str, new_text: str ) -> None:
     return
 
 
+def delete_git_directory(target_directory: Path) -> None:
+    """ Deletes the .git directory in the target directory if it exists. 
+        Called by run_updater. """
+    git_dir = target_directory / '.git'
+    if git_dir.exists() and git_dir.is_dir():
+        shutil.rmtree(git_dir)
+        print(f'Deleted .git directory in {target_directory}.')
+    return
+
+
 ## manager functions ------------------------------------------------
 
 
@@ -109,6 +119,8 @@ def run_updater( target_directory: Path, new_project_name: str, new_app_name: st
     rename_files_and_directories( target_directory, new_project_name, new_app_name )
     ## second pass: update file contents
     update_file_contents( target_directory, new_project_name, new_app_name )
+    ## delete .git directory
+    delete_git_directory( target_directory )
     print( f'Updated project and app references in {target_directory} to {new_project_name} and {new_app_name}.' )
     return
 
