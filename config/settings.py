@@ -11,13 +11,26 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 import json, logging, os
-from pathlib import Path
+import pathlib
+from dotenv import load_dotenv, find_dotenv
+
+
+## load envars ------------------------------------------------------
+dotenv_path = pathlib.Path(__file__).resolve().parent.parent.parent / '.env'
+assert dotenv_path.exists(), f'file does not exist, ``{dotenv_path}``'
+load_dotenv( 
+    find_dotenv( str(dotenv_path), raise_error_if_not_found=True ), 
+    override=True 
+    )
+
 
 log = logging.getLogger(__name__)
 
 
+## django project settings ------------------------------------------
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
 # log.debug( f'BASE_DIR, ``{BASE_DIR}``' )
 
 
@@ -26,15 +39,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = 'django-insecure-3ory+ty87_wq8-21ki6d&a+x=z9_$2m(gr4@vxri@@^g7u!*oc'
-SECRET_KEY = os.environ[ 'XPRJCT_42__SECRET_KEY' ]
+SECRET_KEY = os.environ[ 'SECRET_KEY' ]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
-DEBUG = json.loads( os.environ['XPRJCT_42__DEBUG_JSON'] )
+DEBUG = json.loads( os.environ['DEBUG_JSON'] )
 
-ADMINS = json.loads( os.environ['XPRJCT_42__ADMINS_JSON'] )
+ADMINS = json.loads( os.environ['ADMINS_JSON'] )
 
-ALLOWED_HOSTS = json.loads( os.environ['XPRJCT_42__ALLOWED_HOSTS_JSON'] )
+ALLOWED_HOSTS = json.loads( os.environ['ALLOWED_HOSTS_JSON'] )
 
 
 # Application definition
@@ -126,13 +139,13 @@ USE_TZ = False
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = os.environ['XPRJCT_42__STATIC_URL']
-STATIC_ROOT = os.environ['XPRJCT_42__STATIC_ROOT']  # needed for collectstatic command
+STATIC_URL = os.environ['STATIC_URL']
+STATIC_ROOT = os.environ['STATIC_ROOT']  # needed for collectstatic command
 
 # Email
-SERVER_EMAIL = os.environ['XPRJCT_42__SERVER_EMAIL']
-EMAIL_HOST = os.environ['XPRJCT_42__EMAIL_HOST']
-EMAIL_PORT = int( os.environ['XPRJCT_42__EMAIL_PORT'] )
+SERVER_EMAIL = os.environ['SERVER_EMAIL']
+EMAIL_HOST = os.environ['EMAIL_HOST']
+EMAIL_PORT = int( os.environ['EMAIL_PORT'] )
 
 
 # Default primary key field type
@@ -158,7 +171,7 @@ LOGGING = {
         'logfile': {
             'level':'DEBUG',
             'class':'logging.FileHandler',  # note: configure server to use system's log-rotate to avoid permissions issues
-            'filename': os.environ['XPRJCT_42__LOG_PATH'],
+            'filename': os.environ['LOG_PATH'],
             'formatter': 'standard',
         },
         'console':{
@@ -175,7 +188,7 @@ LOGGING = {
         },
         'foo_app': {
             'handlers': ['logfile'],
-            'level': os.environ['XPRJCT_42__LOG_LEVEL'],
+            'level': os.environ['LOG_LEVEL'],
             'propagate': False
         },
         # 'django.db.backends': {  # re-enable to check sql-queries! <https://docs.djangoproject.com/en/3.2/topics/logging/#django-db-backends>
