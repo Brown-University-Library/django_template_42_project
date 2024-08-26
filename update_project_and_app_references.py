@@ -18,9 +18,7 @@ OLD_APP_NAME = 'foo_app'
 ## helper functions -------------------------------------------------
 
 
-def rename_top_level_directory(
-        target_directory: Path, 
-        new_project_name: str ) -> Path:
+def rename_top_level_directory( target_directory: Path, new_project_name: str ) -> Path:
     """ Renames the top-level project directory if needed.
         Called by run_updater(). """
     if OLD_PROJECT_NAME in target_directory.name:
@@ -34,10 +32,7 @@ def rename_top_level_directory(
     return return_dir
 
 
-def rename_files_and_directories(
-        target_directory: Path, 
-        new_project_name: str, 
-        new_app_name: str ) -> None:
+def rename_files_and_directories( target_directory: Path, new_project_name: str, new_app_name: str ) -> None:
     """ Renames any files and directories in the target directory. 
         Called by run_updater. """
     for item in target_directory.rglob( '*' ):
@@ -58,10 +53,7 @@ def rename_files_and_directories(
                 item.rename( item.with_name(new_file_name) )
 
 
-def update_file_contents( 
-        target_directory: Path, 
-        new_project_name: str, 
-        new_app_name: str ) -> None:
+def update_file_contents( target_directory: Path, new_project_name: str, new_app_name: str ) -> None:
     for item in target_directory.rglob( '*' ):
         assert type(item) == PosixPath
         if item.is_file():
@@ -102,10 +94,7 @@ def parse_args() -> None:
     run_updater( target_directory, new_project_name, new_app_name )
     return
 
-def run_updater( 
-        target_directory: Path, 
-        new_project_name: str, 
-        new_app_name: str ) -> None:
+def run_updater( target_directory: Path, new_project_name: str, new_app_name: str ) -> None:
     """ Performs the update operations on the target directory. 
         Called by parse_args. """
     ## rename top-level directory if needed
@@ -113,15 +102,9 @@ def run_updater(
         target_directory, new_project_name
     )
     ## first pass: rename files and directories
-    rename_files_and_directories(
-        target_directory, 
-        new_project_name, 
-        new_app_name )
+    rename_files_and_directories( target_directory, new_project_name, new_app_name )
     ## second pass: update file contents
-    update_file_contents( 
-        target_directory, 
-        new_project_name, 
-        new_app_name )
+    update_file_contents( target_directory, new_project_name, new_app_name )
     print( f'Updated project and app references in {target_directory} to {new_project_name} and {new_app_name}.' )
     return
 
