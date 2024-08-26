@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-## LOCALDEV settings for django `x_project`
+## LOCALDEV settings for django `foo_project`
 ##
 ## This file is loaded by `env/bin/activate` when running locally...
 ## ...and by `project/config/passenger_wsgi.py` on our servers.
@@ -34,7 +34,7 @@ export XPRJCT_42__DATABASES_JSON='
       "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "HOST": "",
-        "NAME": "../DB/x_project.sqlite3",
+        "NAME": "../DB/foo_project.sqlite3",
         "PASSWORD": "",
         "PORT": "",
         "USER": ""
@@ -49,7 +49,7 @@ export XPRJCT_42__EMAIL_HOST="localhost"
 export XPRJCT_42__EMAIL_PORT="1026"  # will be converted to int in settings.py
 export XPRJCT_42__SERVER_EMAIL="donotreply_x-project@domain.edu"
 
-export XPRJCT_42__LOG_PATH="../logs/x_project.log"
+export XPRJCT_42__LOG_PATH="../logs/foo_project.log"
 export XPRJCT_42__LOG_LEVEL="DEBUG"
 
 export XPRJCT_42__CSRF_TRUSTED_ORIGINS_JSON='["localhost", "127.0.0.1"]'
@@ -96,7 +96,7 @@ export XPRJCT_42__TEST_META_DCT_JSON='{
   "Shibboleth-isMemberOf": "aa:bb:cc;dd:ee:ff;the:group;gg:hh"
 }'
 
-export XPRJCT_42__LOGIN_PROBLEM_EMAIL="x_project_problems@domain.edu"
+export XPRJCT_42__LOGIN_PROBLEM_EMAIL="foo_project_problems@domain.edu"
 
 
 ## end --------------------------------------------------------------
