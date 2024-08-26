@@ -63,7 +63,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [ '%s/x_app' % BASE_DIR ],
+        'DIRS': [ '%s/foo_app' % BASE_DIR ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -173,7 +173,7 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': False,
         },
-        'x_app': {
+        'foo_app': {
             'handlers': ['logfile'],
             'level': os.environ['XPRJCT_42__LOG_LEVEL'],
             'propagate': False
