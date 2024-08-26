@@ -1,0 +1,87 @@
+## ============================================================================
+## standard project-level settings
+## ============================================================================
+
+SECRET_KEY="example_secret_key"
+
+DEBUG_JSON="true"
+
+ADMINS_JSON='
+    [
+      [
+        "exampleFirst exampleLast",
+        "example@domain.edu"
+      ]
+    ]'
+
+ALLOWED_HOSTS_JSON='["127.0.0.1", "127.0.0.1:8000", "0.0.0.0:8000", "Zlocalhost:8000"]'
+
+DATABASES_JSON='
+    {
+      "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "HOST": "",
+        "NAME": "../DBs/foo_project.sqlite",
+        "PASSWORD": "",
+        "PORT": "",
+        "USER": ""
+      }
+    }
+    '
+
+STATIC_URL="/static/"
+STATIC_ROOT="/static/"
+
+EMAIL_HOST="localhost"
+EMAIL_PORT="1026"  # will be converted to int in settings.py
+SERVER_EMAIL="donotreply_foo-project@domain.edu"
+
+LOG_PATH="../logs/foo_project.log"
+LOG_LEVEL="DEBUG"
+
+CSRF_TRUSTED_ORIGINS_JSON='["localhost", "127.0.0.1"]'
+
+## https://docs.djangoproject.com/en/4.2/topics/cache/
+## - TIMEOUT is in seconds (0 means don't cache); CULL_FREQUENCY defaults to one-third
+CACHES_JSON='
+{
+  "default": {
+    "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
+    "LOCATION": "../cache_dir",
+    "TIMEOUT": 0,
+    "OPTIONS": {
+        "MAX_ENTRIES": 1000
+    }
+  }
+}
+'
+
+## ============================================================================
+## app
+## ============================================================================
+
+README_URL="https://github.com/birkin/django_template_42_project/blob/main/README.md"
+
+SUPER_USERS_JSON='[
+]'
+
+STAFF_USERS_JSON='
+[
+  "eppn@domain.edu"
+]'
+
+STAFF_GROUPER_GROUP="the:group"
+
+TEST_META_DCT_JSON='{
+  "Shibboleth-eppn": "eppn@brown.edu",
+  "Shibboleth-brownNetId": "First_Last",
+  "Shibboleth-mail": "first_last@domain.edu",
+  "Shibboleth-givenName": "First",
+  "Shibboleth-sn": "Last",
+  "Shibboleth-isMemberOf": "aa:bb:cc;dd:ee:ff;the:group;gg:hh"
+}'
+
+LOGIN_PROBLEM_EMAIL="foo_project_problems@domain.edu"
+
+
+## end --------------------------------------------------------------
