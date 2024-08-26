@@ -7,7 +7,7 @@ Template for new django projects.
 
 This template project has references to `foo_project` and `foo_app`.
 
-The instructions below show how to use the template to create a project named `x_project` with an app `x_app`.
+The instructions below show how to use the template-repo to create a project named `x_project` with an app `x_app`.
 
 ```
 $ mkdir ./x_project_stuff
