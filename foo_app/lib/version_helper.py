@@ -39,7 +39,9 @@ class GatherCommitAndBranchData:
         self.branch_data = ''
 
     async def manage_git_calls( self ):
-        """ Triggers calling subprocess commands concurrently.
+        """ Triggers separate version and commit preparation concurrently.
+            - Originally this class made two separate asyncronous subprocess calls to git.
+            - Now it reads the `.git/HEAD` file to get both the commit and branch data (to avoid the `dubious ownership` issues), so it no longer benefits from asyncronous calls.
             Called by views.version() """
         log.debug( 'manage_git_calls' )
         results_holder_dct = {}  # receives git responses as they're produced
@@ -53,7 +55,7 @@ class GatherCommitAndBranchData:
         return
 
     async def fetch_commit_data(self, results_holder_dct):
-        """ Fetches commit-data by reading the `.git/HEAD` file (avoiding calling git via subprocess due to user issue).
+        """ Fetches commit-data by reading the `.git/HEAD` file (avoiding calling git via subprocess due to `dubious ownership` issue).
             Called by manage_git_calls() """
         log.debug('fetch_commit_data')
         git_dir = pathlib.Path( settings.BASE_DIR ) / '.git'
@@ -72,7 +74,7 @@ class GatherCommitAndBranchData:
         return
 
     async def fetch_branch_data(self, results_holder_dct):
-        """ Fetches branch-data by reading the `.git/HEAD` file (avoiding calling git via subprocess due to user issue).
+        """ Fetches branch-data by reading the `.git/HEAD` file (avoiding calling git via subprocess due to `dubious ownership` issue).
             Called by manage_git_calls() """
         log.debug('fetch_branch_data')
         git_dir = pathlib.Path(settings.BASE_DIR) / '.git'

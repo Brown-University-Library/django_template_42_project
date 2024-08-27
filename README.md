@@ -1,6 +1,17 @@
 # purpose
 
-Template for new django projects.
+Lightweight template for new django projects.
+
+Includes a few nice-practices such as: 
+- log-entries showing function and line-number.
+- git branch/commit url that avoids `dubious ownership` error.
+- dev-only error-check url (enables confirmation that email-admins-on-error is set up correctly).
+- uses python-dotenv.
+- uses requirements tilde-comparators in the `.in` files for stable upgrades.
+- uses layered `base.in` and `server.in` files for clarity re what's in the venv. 
+- ensures compatible urllib3 and mysqlclient versions for reliable deployment.
+
+--- 
 
 
 # local-install
@@ -28,3 +39,5 @@ $ source ../venv/bin/activate
 ```
 
 Then open a browser to <http://127.0.0.1:8000/>.
+
+---
