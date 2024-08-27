@@ -5,6 +5,7 @@ Lightweight template for new django projects.
 Includes a few nice-practices such as: 
 - log-entries showing function and line-number.
 - git branch/commit url that avoids `dubious ownership` error.
+- includes a couple of client-get tests that respond differentially to dev and prod settings.
 - dev-only error-check url (enables confirmation that email-admins-on-error is set up correctly).
 - uses python-dotenv.
 - uses requirements tilde-comparators in the `.in` files for stable upgrades.
