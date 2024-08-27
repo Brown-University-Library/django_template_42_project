@@ -84,20 +84,10 @@ def delete_git_directory(target_directory: Path) -> None:
     if git_dir.exists():
         if git_dir.is_dir():
             shutil.rmtree(git_dir)
-            print( f'Deleted .git directory in {target_directory}.' )
+            print( f'Deleted .git directory in ``{target_directory}``.' )
     else:
         print( f'No .git directory found at ``{git_dir}``.' )
     return
-
-
-# def delete_git_directory(target_directory: Path) -> None:
-#     """ Deletes the .git directory in the target directory if it exists. 
-#         Called by run_updater. """
-#     git_dir: Path = target_directory / '.git'
-#     if git_dir.exists() and git_dir.is_dir():
-#         shutil.rmtree(git_dir)
-#         print(f'Deleted .git directory in {target_directory}.')
-#     return
 
 
 ## manager functions ------------------------------------------------
@@ -137,7 +127,7 @@ def run_updater( target_directory: Path, new_project_name: str, new_app_name: st
     update_file_contents( target_directory, new_project_name, new_app_name )
     ## delete .git directory
     delete_git_directory( target_directory )
-    print( f'Updated project and app references in {target_directory} to {new_project_name} and {new_app_name}.' )
+    print( f'Updated project and app references in ``{target_directory}`` to ``{new_project_name}`` and ``{new_app_name}``.' )
     return
 
 
