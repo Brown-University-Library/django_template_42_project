@@ -80,10 +80,13 @@ def replace_in_file( file_path: Path, old_text: str, new_text: str ) -> None:
 def delete_git_directory(target_directory: Path) -> None:
     """ Deletes the .git directory in the target directory if it exists. 
         Called by run_updater. """
-    git_dir = target_directory / '.git'
-    if git_dir.exists() and git_dir.is_dir():
-        shutil.rmtree(git_dir)
-        print(f'Deleted .git directory in {target_directory}.')
+    git_dir: Path = target_directory / '.git'
+    if git_dir.exists():
+        if git_dir.is_dir():
+            shutil.rmtree(git_dir)
+            print( f'Deleted .git directory in ``{target_directory}``.' )
+    else:
+        print( f'No .git directory found at ``{git_dir}``.' )
     return
 
 
@@ -103,6 +106,9 @@ def parse_args() -> None:
     target_directory: Path = Path(args.target_dir)
     new_project_name: str = args.new_project_name
     new_app_name: str = args.new_app_name
+    ## confirm target_directory exists
+    if not target_directory.exists():
+        raise FileNotFoundError( f'Target directory ``{target_directory}`` does not exist.' )
     ## run updater
     run_updater( target_directory, new_project_name, new_app_name )
     return
@@ -121,7 +127,7 @@ def run_updater( target_directory: Path, new_project_name: str, new_app_name: st
     update_file_contents( target_directory, new_project_name, new_app_name )
     ## delete .git directory
     delete_git_directory( target_directory )
-    print( f'Updated project and app references in {target_directory} to {new_project_name} and {new_app_name}.' )
+    print( f'Updated project and app references in ``{target_directory}`` to ``{new_project_name}`` and ``{new_app_name}``.' )
     return
 
 
