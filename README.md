@@ -4,7 +4,8 @@ Lightweight template for new django projects.
 
 Includes a few nice-practices: 
 - nothing private is in the project-repo; fostering public repos.
-- log-formatting shows the file, function, and line-number.
+- shows pattern to keep views.py functions short-ish manager functions (eg views.version()).
+- log-formatting shows useful stuff.
 - git branch/commit url is constructed in a way that avoids the new `dubious ownership` error.
 - includes a couple of client-get tests that respond differentially to dev and prod settings.
 - dev-only error-check url (enables confirmation that email-admins-on-error is set up correctly).
@@ -21,7 +22,7 @@ Includes a few nice-practices:
 Notes about the install instructions...
 - The instructions below reference `x_project_stuff`, `x_project`, and `x_app`. In all cases replace with the name of your project, like: `isbn_api_project_stuff`, `isbn_api_project`, and `isbn_api_app`.
 - Sensible suggestion: use the version of python used by the oldest server on which you'll be running the code. (Django 4.2x requires at least Python 3.8.)
-- The `update_project_and_app_references.py` script ([link](update_project)) deletes the cloned `.git` directory. Why? So you don't accidentally start building away and commit to the template repo. After this installation, creating a new git repo is one of the first things you should do.
+- The `update_project_and_app_references.py` script ([link](update_project_script)) deletes the cloned `.git` directory. Why? So you don't accidentally start building away and commit to the template repo. After this installation, creating a new git repo is one of the first things you should do.
 - When you run the `pip istall ...` command, you may get a message about upgrading pip, with instructions. That's always a good idea, but not necessary for this install.
 - When you starting the webapp via `runserver`, you'll get a message that there are migrations that need to be run, with instructions. You can go ahead and do that, or do it later (this is a one-time thing).
 
@@ -54,7 +55,7 @@ That's it!
 
 Then open a browser to <http://127.0.0.1:8000/>.
 
-Also try <http://127.0.0.1:8000/error_check/>. You'll see the intentionally-raised error in the browser (would result in a `404` on production), but if you want to confirm that this really would send an email, open another terminal window and type:
+Try <http://127.0.0.1:8000/error_check/>. You'll see the intentionally-raised error in the browser (would result in a `404` on production), but if you want to confirm that this really would send an email, open another terminal window and type:
 
 ```bash
 $ python3 -m smtpd -n -c DebuggingServer localhost:1026
@@ -62,12 +63,14 @@ $ python3 -m smtpd -n -c DebuggingServer localhost:1026
 
 You won't initially see anything, but if you reload the error-check url, and then check this terminal window again, you'll see the email-data that would have been sent.
 
-Also try <http://127.0.0.1:8000/version/>. Once you `git init`, `git add --all`, and `git commit -am "initial commit"`, it'll show the branch and commit -- super-handy for dev and prod confirmations.
+Trry <http://127.0.0.1:8000/version/>. Once you `git init`, `git add --all`, and `git commit -am "initial commit"`, it'll show the branch and commit -- super-handy for dev and prod confirmations.
 
-Finally, try `(venv) $ python ./manage.py test`. There are two simple tests that should pass.
+Try `(venv) $ python ./manage.py test`. There are two simple tests that should pass.
+
+Check out the logs (`project_stuff/logs/`). The envar log-level is `DEBUG`, easily changed. On the servers that should be `INFO` or higher, and remember to rotate them, not via python's log-rotate -- but by the server's log-rotate.
 
 Next -- well, the sky's the limit!
 
 ---
 
-[update_project]: <https://github.com/Brown-University-Library/django_template_42_project/blob/main/update_project_and_app_references.py>
+[update_project_script]: <https://github.com/Brown-University-Library/django_template_42_project/blob/main/update_project_and_app_references.py>
