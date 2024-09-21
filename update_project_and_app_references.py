@@ -27,7 +27,7 @@ def rename_top_level_directory( target_directory: Path, new_project_name: str ) 
         Called by run_updater(). """
     if REPO_PROJECT_NAME in target_directory.name:
         new_directory: Path = target_directory.with_name(
-            target_directory.name.replace(OLD_PROJECT_NAME, new_project_name)
+            target_directory.name.replace( REPO_PROJECT_NAME, new_project_name )
         )
         target_directory.rename( new_directory )
         return_dir: Path = new_directory
