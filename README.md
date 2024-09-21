@@ -22,7 +22,7 @@ Includes a few nice-practices:
 Notes about the install instructions...
 - The instructions below reference `x_project_stuff`, `x_project`, and `x_app`. In all cases replace with the name of your project, like: `isbn_api_project_stuff`, `isbn_api_project`, and `isbn_api_app`.
 - Sensible suggestion: use the version of python used by the oldest server on which you'll be running the code. (Django 4.2x requires at least Python 3.8.)
-- The `update_project_and_app_references.py` script ([link](update_project_script)) deletes the cloned `.git` directory. Why? So you don't accidentally start building away and commit to the template repo. After this installation, creating a new git repo is one of the first things you should do.
+- The `update_project_and_app_references.py` script ([link](https://github.com/Brown-University-Library/django_template_42_project/blob/main/update_project_and_app_references.py)) deletes the cloned `.git` directory. Why? So you don't accidentally start building away and commit to the template repo. After this installation, creating a new git repo is one of the first things you should do.
 - When you run the `pip istall ...` command, you may get a message about upgrading pip, with instructions. That's always a good idea, but not necessary for this install.
 - When you starting the webapp via `runserver`, you'll get a message that there are migrations that need to be run, with instructions. You can go ahead and do that, or do it later (this is a one-time thing).
 
@@ -72,5 +72,3 @@ Check out the logs (`project_stuff/logs/`). The envar log-level is `DEBUG`, easi
 Next -- well, the sky's the limit!
 
 ---
-
-[update_project_script]: <https://github.com/Brown-University-Library/django_template_42_project/blob/main/update_project_and_app_references.py>
