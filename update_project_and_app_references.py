@@ -14,7 +14,8 @@ from pathlib import Path, PosixPath
 
 
 ## constants --------------------------------------------------------
-OLD_PROJECT_NAME = 'foo_project'
+REPO_PROJECT_NAME = 'django_template_42_project'    # raw git-clone name
+OLD_PROJECT_NAME = 'foo_project'                    # all the internal code project-references
 OLD_APP_NAME = 'foo_app'
 
 
@@ -24,7 +25,7 @@ OLD_APP_NAME = 'foo_app'
 def rename_top_level_directory( target_directory: Path, new_project_name: str ) -> Path:
     """ Renames the top-level project directory if needed.
         Called by run_updater(). """
-    if OLD_PROJECT_NAME in target_directory.name:
+    if REPO_PROJECT_NAME in target_directory.name:
         new_directory: Path = target_directory.with_name(
             target_directory.name.replace(OLD_PROJECT_NAME, new_project_name)
         )
