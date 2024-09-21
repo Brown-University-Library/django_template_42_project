@@ -32,9 +32,9 @@ DATABASES_JSON='
 STATIC_URL="/static/"
 STATIC_ROOT="/static/"
 
+SERVER_EMAIL="donotreply_foo-project@domain.edu"
 EMAIL_HOST="localhost"
 EMAIL_PORT="1026"  # will be converted to int in settings.py
-SERVER_EMAIL="donotreply_foo-project@domain.edu"
 
 LOG_PATH="../logs/foo_project.log"
 LOG_LEVEL="DEBUG"

@@ -48,7 +48,7 @@ DEBUG = json.loads( os.environ['DEBUG_JSON'] )
 ADMINS = json.loads( os.environ['ADMINS_JSON'] )
 
 ALLOWED_HOSTS = json.loads( os.environ['ALLOWED_HOSTS_JSON'] )
-
+CSRF_TRUSTED_ORIGINS = json.loads( os.environ['CSRF_TRUSTED_ORIGINS_JSON'] )    
 
 # Application definition
 
@@ -94,14 +94,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': '../DBs/db.sqlite3',
-    }
-}
-
+DATABASES = json.loads( os.environ['DATABASES_JSON'] )
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -191,9 +184,9 @@ LOGGING = {
             'level': os.environ['LOG_LEVEL'],
             'propagate': False
         },
-        # 'django.db.backends': {  # re-enable to check sql-queries! <https://docs.djangoproject.com/en/3.2/topics/logging/#django-db-backends>
+        # 'django.db.backends': {  # re-enable to check sql-queries! <https://docs.djangoproject.com/en/4.2/ref/logging/#django-db-backends>
         #     'handlers': ['logfile'],
-        #     'level': os.environ.get(u'BUL_CBP__LOG_LEVEL'),
+        #     'level': os.environ.get( 'the-log-level', 'DEBUG' ),
         #     'propagate': False
         # },
     }
