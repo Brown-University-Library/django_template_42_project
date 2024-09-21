@@ -14,7 +14,9 @@ ADMINS_JSON='
       ]
     ]'
 
-ALLOWED_HOSTS_JSON='["127.0.0.1", "127.0.0.1:8000", "0.0.0.0:8000", "localhost:8000"]'
+# ALLOWED_HOSTS_JSON='["127.0.0.1", "127.0.0.1:8000", "0.0.0.0:8000", "Zlocalhost:8000"]'
+ALLOWED_HOSTS_JSON='[]'
+CSRF_TRUSTED_ORIGINS_JSON='["localhost", "127.0.0.1"]'
 
 DATABASES_JSON='
     {
@@ -39,7 +41,6 @@ EMAIL_PORT="1026"  # will be converted to int in settings.py
 LOG_PATH="../logs/foo_project.log"
 LOG_LEVEL="DEBUG"
 
-CSRF_TRUSTED_ORIGINS_JSON='["localhost", "127.0.0.1"]'
 
 ## https://docs.djangoproject.com/en/4.2/topics/cache/
 ## - TIMEOUT is in seconds (0 means don't cache); CULL_FREQUENCY defaults to one-third
@@ -60,25 +61,17 @@ CACHES_JSON='
 ## app
 ## ============================================================================
 
+## the envars below aren't used in this template, but are commonly used in our apps
+
 README_URL="https://github.com/birkin/django_template_42_project/blob/main/README.md"
 
-SUPER_USERS_JSON='[
-]'
-
-STAFF_USERS_JSON='
-[
-  "eppn@domain.edu"
-]'
-
-STAFF_GROUPER_GROUP="the:group"
-
+## for localhost shib-testing
 TEST_META_DCT_JSON='{
-  "Shibboleth-eppn": "eppn@brown.edu",
-  "Shibboleth-brownNetId": "First_Last",
-  "Shibboleth-mail": "first_last@domain.edu",
-  "Shibboleth-givenName": "First",
-  "Shibboleth-sn": "Last",
-  "Shibboleth-isMemberOf": "aa:bb:cc;dd:ee:ff;the:group;gg:hh"
+  "shib-eppn-key": "eppn@brown.edu",
+  "shib-joinedname-key": "First_Last",
+  "shib-email-key": "first_last@domain.edu",
+  "shib-firstname-key": "First",
+  "shib-groups-key": "aa:bb:cc;dd:ee:ff;the:group;gg:hh"
 }'
 
 LOGIN_PROBLEM_EMAIL="foo_project_problems@domain.edu"
