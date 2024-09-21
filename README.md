@@ -24,14 +24,14 @@ Notes about the install instructions...
 - The `update_project_and_app_references.py` script ([link](update_project)) deletes the cloned `.git` directory. Why? So you don't accidentally start building away and commit to the template repo. After this installation, creating a new git repo is one of the first things you should do.
 - When you starting the webapp via `runserver`, you'll get a message that there are migrations that need to be run. You can go ahead and do that, or do it another time.
 
-```
+```bash
 $ mkdir ./x_project_stuff
 $ cd ./x_project_stuff/
 $ mkdir ./logs
 $ mkdir ./DBs
 $ /path/to/python3.8 -m venv ./venv
 $ git clone git@github.com:birkin/django_template_42_project.git
-$ cd ./x_project/
+$ cd ./django_template_42_project/
 
 ## the line below is a single command, all on one line (clarifying in case it wraps)
 $ /path/to/python3.8 ./update_project_and_app_references.py --target_dir "/full/path/to/x_project/" --new_project_name x_project --new_app_name x_app  
