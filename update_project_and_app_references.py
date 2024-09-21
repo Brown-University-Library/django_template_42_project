@@ -48,7 +48,9 @@ def rename_files_and_directories( target_directory: Path, new_project_name: str,
                 new_dir_name: str = item.name.replace( OLD_APP_NAME, new_app_name )
                 item.rename( item.with_name(new_dir_name) )
         elif item.is_file():
-            if OLD_PROJECT_NAME in item.name:
+            if item.name == 'update_project_and_app_references.py':
+                continue
+            elif OLD_PROJECT_NAME in item.name:
                 new_file_name: str = item.name.replace(OLD_PROJECT_NAME, new_project_name)
                 item.rename( item.with_name(new_file_name) )
             elif OLD_APP_NAME in item.name:
