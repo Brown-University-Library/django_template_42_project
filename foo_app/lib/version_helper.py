@@ -59,15 +59,22 @@ class GatherCommitAndBranchData:
             Called by manage_git_calls() """
         log.debug('fetch_commit_data')
         git_dir = pathlib.Path( settings.BASE_DIR ) / '.git'
-        ## read the HEAD file to find the current branch ------------
-        head_file: pathlib.Path = git_dir / 'HEAD'
-        ref_line: str = head_file.read_text().strip()
-        if ref_line.startswith('ref:'):
-            ref_path = ref_line.split(' ')[1]  # extract the ref path
-            commit_file: pathlib.Path = git_dir / ref_path
-            commit: str = commit_file.read_text().strip()
-        else:  #if it's a detached HEAD, the commit hash is directly in the HEAD file
-            commit: str = ref_line
+        try:
+            ## read the HEAD file to find the current branch ------------
+            head_file: pathlib.Path = git_dir / 'HEAD'
+            ref_line: str = head_file.read_text().strip()
+            if ref_line.startswith('ref:'):
+                ref_path = ref_line.split(' ')[1]  # extract the ref path
+                commit_file: pathlib.Path = git_dir / ref_path
+                commit: str = commit_file.read_text().strip()
+            else:  #if it's a detached HEAD, the commit hash is directly in the HEAD file
+                commit: str = ref_line
+        except FileNotFoundError:
+            log.error( 'no `.git` directory or HEAD file found.' )
+            commit = 'commit_not_found'
+        except Exception as e:
+            log.exception( 'other problem fetching commit data' )
+            commit = 'commit_not_found'
         log.debug( f'commit, ``{commit}``' )
         ## update holder --------------------------------------------
         results_holder_dct['commit'] = commit
@@ -78,13 +85,20 @@ class GatherCommitAndBranchData:
             Called by manage_git_calls() """
         log.debug('fetch_branch_data')
         git_dir = pathlib.Path(settings.BASE_DIR) / '.git'
-        ## read the HEAD file to find the current branch ------------
-        head_file = git_dir / 'HEAD'
-        ref_line = head_file.read_text().strip()
-        if ref_line.startswith('ref:'):
-            branch = ref_line.split('/')[-1]  # extract the branch name
-        else:
-            branch = 'detached'
+        try:
+            ## read the HEAD file to find the current branch ------------
+            head_file = git_dir / 'HEAD'
+            ref_line = head_file.read_text().strip()
+            if ref_line.startswith('ref:'):
+                branch = ref_line.split('/')[-1]  # extract the branch name
+            else:
+                branch = 'detached'
+        except FileNotFoundError:
+            log.error( 'no `.git` directory or HEAD file found.' )
+            branch = 'branch_not_found'
+        except Exception as e:
+            log.exception( 'other problem fetching branch data')
+            branch = 'branch_not_found'
         ## update holder --------------------------------------------
         results_holder_dct['branch'] = branch
         return
