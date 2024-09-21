@@ -2,9 +2,9 @@
 
 Lightweight template for new django projects.
 
-Includes a few nice-practices such as: 
-- log-entries showing function and line-number.
-- git branch/commit url that avoids `dubious ownership` error.
+Includes a few nice-practices: 
+- log-formatting showing function and line-number.
+- git branch/commit url is constructed in a way that avoids the new `dubious ownership` error.
 - includes a couple of client-get tests that respond differentially to dev and prod settings.
 - dev-only error-check url (enables confirmation that email-admins-on-error is set up correctly).
 - uses python-dotenv.
@@ -17,12 +17,10 @@ Includes a few nice-practices such as:
 
 # local-install
 
-This template project has references to `foo_project` and `foo_app`.
-
-The instructions below show how to use the template-repo to create a project named `x_project` with an app `x_app`.
+This project-template-repo contains references to `foo_project` and `foo_app`; the instructions below show how to use this project-template-repo to create a project named `x_project` with an app `x_app` -- but you'll replace x_project and x_app with the project/app names you desire.
 
 A couple of notes about the instructions...
-- Sensible suggestion: use the version of python used by the oldest server on which you'll be running the code.
+- Sensible suggestion: use the version of python used by the oldest server on which you'll be running the code. (Django 4.2x requires at least Python 3.8.)
 - The `update_project_and_app_references.py` script ([link](update_project)) deletes the `.git` directory, so you don't accedentally start building away and commit to the template repo.
 - When you starting the webapp via `runserver`, you'll get a message that there are migrations that need to be run. You can go ahead and do that, or do it another time.
 
