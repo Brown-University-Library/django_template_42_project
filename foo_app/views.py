@@ -18,6 +18,9 @@ log = logging.getLogger(__name__)
 
 
 def info(request):
+    """ The "about" view. 
+        Can get here from 'info' url, and the root-url redirects here. """
+    log.debug( 'starting info()' )
     return HttpResponse( "Hello, world." )
 
 
@@ -27,22 +30,24 @@ def info(request):
 
 
 def error_check( request ):
-    """ For an easy way to check that admins receive error-emails (in development)...
+    """ Offers an easy way to check that admins receive error-emails (in development).
         To view error-emails in runserver-development:
         - run, in another terminal window: `python -m smtpd -n -c DebuggingServer localhost:1026`,
         - (or substitue your own settings for localhost:1026)
     """
+    log.debug( 'starting error_check()' )
     log.debug( f'project_settings.DEBUG, ``{project_settings.DEBUG}``' )
-    if project_settings.DEBUG == True:
+    if project_settings.DEBUG == True:  # localdev and dev-server; never production
         log.debug( 'triggering exception' )
-        raise Exception( 'Raising intentional exception.' )
+        raise Exception( 'Raising intentional exception to check email-admins-on-error functionality.' )
     else:
-        log.debug( 'returing 404' )
+        log.debug( 'returning 404' )
         return HttpResponseNotFound( '<div>404 / Not Found</div>' )
 
 
 def version( request ):
     """ Returns basic branch and commit data. """
+    log.debug( 'starting version()' )
     rq_now = datetime.datetime.now()
     gatherer = GatherCommitAndBranchData()
     trio.run( gatherer.manage_git_calls )
