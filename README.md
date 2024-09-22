@@ -6,7 +6,7 @@ Includes a few nice-practices:
 - nothing private is in the project-repo; avoids using the `.gitignore` for security.
 - shows pattern to keep views.py functions short-ish, to act as manager functions (eg `views.version()`).
 - log-formatting shows useful stuff.
-- git branch/commit url is constructed in a way that avoids the new `dubious ownership` error.
+- git branch/commit url is constructed in a way that avoids the new git `dubious ownership` error.
 - includes a couple of client-get tests that respond differentially to dev and prod settings.
 - dev-only error-check url (enables confirmation that email-admins-on-error is set up correctly).
 - uses python-dotenv.
