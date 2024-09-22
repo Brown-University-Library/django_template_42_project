@@ -13,6 +13,7 @@ Includes a few nice-practices:
 - uses tilde-comparators in the `.in` requirements files for stable upgrades.
 - uses layered `base.in` and `server.in` requirements files for clarity re what's really in the venv. 
 - ensures compatible urllib3 and mysqlclient versions for reliable deployment.
+- contains one possible pattern to make async calls (`app/lib/version_helper.manage_git_calls()`)
 
 --- 
 

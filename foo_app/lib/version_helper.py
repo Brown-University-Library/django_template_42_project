@@ -41,7 +41,8 @@ class GatherCommitAndBranchData:
     async def manage_git_calls( self ):
         """ Triggers separate version and commit preparation concurrently.
             - Originally this class made two separate asyncronous subprocess calls to git.
-            - Now it reads the `.git/HEAD` file to get both the commit and branch data (to avoid the `dubious ownership` issues), so it no longer benefits from asyncronous calls.
+            - Now it reads the `.git/HEAD` file to get both the commit and branch data (to avoid the `dubious ownership` issues), 
+              so it no longer benefits from asyncronous calls, but keeping for reference.
             Called by views.version() """
         log.debug( 'manage_git_calls' )
         results_holder_dct = {}  # receives git responses as they're produced
