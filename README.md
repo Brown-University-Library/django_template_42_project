@@ -24,7 +24,7 @@ Notes about the install instructions...
 - Sensible suggestion: use the version of python used by the oldest server on which you'll be running the code. (Django 4.2x requires at least Python 3.8.)
 - The `update_project_and_app_references.py` script ([link](https://github.com/Brown-University-Library/django_template_42_project/blob/main/update_project_and_app_references.py)) deletes the cloned `.git` directory. Why? So you don't accidentally start building away and commit to the template repo. After this installation, creating a new git repo is one of the first things you should do.
 - When you run the `pip istall ...` command, you may get a message about upgrading pip, with instructions. That's always a good idea, but not necessary for this install.
-- When you starting the webapp via `runserver`, you'll get a message that there are migrations that need to be run, with instructions. You can go ahead and do that, or do it later (this is a one-time thing).
+- When you start the webapp via `runserver`, you'll get a message that there are migrations that need to be run, with instructions. You can go ahead and do that, or do it later (this is a one-time thing).
 
 ```bash
 $ mkdir ./x_project_stuff
