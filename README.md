@@ -1,6 +1,6 @@
 # purpose
 
-Lightweight template for new django projects.
+This is a template for new django projects, for standardization and to get up and running easily and quickly.
 
 Includes a few nice-practices: 
 - nothing private is in the project-repo; fostering public repos.
@@ -33,14 +33,11 @@ $ mkdir ./logs
 $ mkdir ./DBs
 $ /path/to/python3.8 -m venv ./venv
 $ git clone https://github.com/Brown-University-Library/django_template_42_project.git
-$ cd ./django_template_42_project/
 
 ## the line below is a single command, all on one line (clarifying in case it wraps)
-$ /path/to/python3.8 ./update_project_and_app_references.py --target_dir "/full/path/to/x_project/" --new_project_name x_project --new_app_name x_app  
+$ /path/to/python3.8 ./django_template_42_project/update_project_and_app_references.py --target_dir "./django_template_42_project/" --new_project_name "x_project" --new_app_name "x_app"  
 
-## get back into the correct directory (the command above changed the name)
-cd ../x_project/
-
+$ cd ./x_project/
 $ cp ./config/dotenv_example_file.txt ../.env
 $ source ../venv/bin/activate
 (venv) $ pip install -r ./config/requirements/requirements_base.txt
