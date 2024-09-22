@@ -53,7 +53,7 @@ That's it!
 
 # Stuff to try
 
-Then open a browser to <http://127.0.0.1:8000/>.
+Open a browser to <http://127.0.0.1:8000/>.
 
 Try <http://127.0.0.1:8000/error_check/>. You'll see the intentionally-raised error in the browser (would result in a `404` on production), but if you want to confirm that this really would send an email, open another terminal window and type:
 
