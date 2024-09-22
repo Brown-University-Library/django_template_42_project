@@ -32,7 +32,7 @@ $ cd ./x_project_stuff/
 $ mkdir ./logs
 $ mkdir ./DBs
 $ /path/to/python3.8 -m venv ./venv
-$ git clone git@github.com:birkin/django_template_42_project.git
+$ git clone https://github.com/Brown-University-Library/django_template_42_project.git
 $ cd ./django_template_42_project/
 
 ## the line below is a single command, all on one line (clarifying in case it wraps)
