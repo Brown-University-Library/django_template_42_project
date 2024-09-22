@@ -3,8 +3,8 @@
 This is a template for new django projects, for standardization and to get up and running easily and quickly.
 
 Includes a few nice-practices: 
-- nothing private is in the project-repo; fostering public repos.
-- shows pattern to keep views.py functions short-ish manager functions (eg views.version()).
+- nothing private is in the project-repo.
+- shows pattern to keep views.py functions short-ish, to act as manager functions (eg `views.version()`).
 - log-formatting shows useful stuff.
 - git branch/commit url is constructed in a way that avoids the new `dubious ownership` error.
 - includes a couple of client-get tests that respond differentially to dev and prod settings.
