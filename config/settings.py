@@ -187,7 +187,7 @@ LOGGING = {
         },
         # 'django.db.backends': {  # re-enable to check sql-queries! <https://docs.djangoproject.com/en/4.2/ref/logging/#django-db-backends>
         #     'handlers': ['logfile'],
-        #     'level': os.environ.get( 'the-log-level', 'DEBUG' ),
+        #     'level': os.environ['LOG_LEVEL'],
         #     'propagate': False
         # },
     }
