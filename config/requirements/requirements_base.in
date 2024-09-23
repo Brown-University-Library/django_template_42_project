@@ -1,6 +1,6 @@
-Django~=4.2.6
+Django~=4.2.0
 pip-tools~=7.4.0
 python-dotenv~=1.0.0
-requests~=2.32.0  # can't go higher, because it requires urllib3 2.x, which requires a version of open-ssl newer than the one on our servers.
+requests~=2.27.0    # can't go higher due to urllib3 open-ssl server-version issue
 trio~=0.26.0
-urllib3~=2.1.0
+urllib3~=1.26.0     # can't go higher due to open-ssl server-version issue
