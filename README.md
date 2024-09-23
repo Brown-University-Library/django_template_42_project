@@ -24,7 +24,7 @@ $ mkdir ./DBs
 ## get the project-code
 $ git clone https://github.com/Brown-University-Library/django_template_42_project.git
 
-## update project-name (line below is a long single line; clarifying in case it wraps
+## update project-name (line below is a single long line; clarifying in case it wraps)
 $ /path/to/python3.8 ./django_template_42_project/update_project_and_app_references.py --target_dir "./django_template_42_project/" --new_project_name "x_project" --new_app_name "x_app"  
 
 ## setup the envar-settings
