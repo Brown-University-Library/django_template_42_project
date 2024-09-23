@@ -1,6 +1,6 @@
 # purpose
 
-This is a template for new django projects, for standardization and to get up and running easily and quickly.
+This is a template for new django projects, for standardization and to get up and running, locally, easily and quickly.
 
 Includes a few nice-practices: 
 - Nothing private is in the project-repo; avoids using the `.gitignore` for security.
