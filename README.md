@@ -51,7 +51,7 @@ That's it!
 
 ---
 
-# Stuff to try
+# stuff to try
 
 - Open a browser to <http://127.0.0.1:8000/>. That'll redirect to <http://127.0.0.1:8000/info/>. 
 
