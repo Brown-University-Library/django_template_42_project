@@ -1,6 +1,6 @@
 Django~=4.2.0
 pip-tools~=7.4.0
 python-dotenv~=1.0.0
-requests~=2.27.0    # can't go higher due to urllib3 open-ssl server-version issue
+requests~=2.27.0    # for down-stream compatibility
 trio~=0.26.0
-urllib3~=1.26.0     # can't go higher due to open-ssl server-version issue
+urllib3~=1.26.0     # for down-stream compatibility

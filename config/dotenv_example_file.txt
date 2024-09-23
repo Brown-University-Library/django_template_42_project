@@ -16,7 +16,6 @@ ADMINS_JSON='
       ]
     ]'
 
-# ALLOWED_HOSTS_JSON='["127.0.0.1", "127.0.0.1:8000", "0.0.0.0:8000", "Zlocalhost:8000"]'
 ALLOWED_HOSTS_JSON='[]'
 CSRF_TRUSTED_ORIGINS_JSON='[]'
 
