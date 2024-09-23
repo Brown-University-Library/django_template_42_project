@@ -9,7 +9,7 @@ This is a template for new django projects -- to standardize on some nice featur
 
 Notes about the install instructions...
 - The install-instructions below reference `x_project_stuff`, `x_project`, and `x_app`. In all cases replace with the name of your project, like: `isbn_api_project_stuff`, `isbn_api_project`, and `isbn_api_app`.
-- You'll also need to update, in the install-instructions, the version of python you're using. Sensible suggestion: use the version of python used by the oldest server on which you'll be running the code. (Django 4.2x requires at least Python 3.8.)
+- You'll also need to update, in the install-instructions, the path to the version of python you're using. Sensible suggestion: use the version of python used by the oldest server on which you'll be running the code. (Django 4.2x requires at least Python 3.8.)
 - The `update_project_and_app_references.py` script ([link](https://github.com/Brown-University-Library/django_template_42_project/blob/main/update_project_and_app_references.py)) deletes the cloned `.git` directory (in addition to its main purpose to rename the project). Why? So you don't accidentally start building away and commit to the template repo. After this installation, creating a new git repo is one of the first things you should do.
 - When you run the `pip istall ...` command, you may get a message about upgrading pip, with instructions. That's always a good idea, but not necessary for this install.
 - When you start the webapp via `runserver`, you'll get a message that there are migrations that need to be run, with instructions. You can go ahead and do that, or do it later (this is a one-time thing).
@@ -25,13 +25,14 @@ $ mkdir ./DBs
 $ git clone https://github.com/Brown-University-Library/django_template_42_project.git
 
 ## update project-name (line below is a single long line; clarifying in case it wraps)
-$ /path/to/python3.8 ./django_template_42_project/update_project_and_app_references.py --target_dir "./django_template_42_project/" --new_project_name "x_project" --new_app_name "x_app"  
+$ /path/to/python3 ./django_template_42_project/update_project_and_app_references.py --target_dir "./django_template_42_project/" --new_project_name "x_project" --new_app_name "x_app"  
 
 ## setup the envar-settings
 $ cd ./x_project/
 $ cp ./config/dotenv_example_file.txt ../.env
 
 ## setup the virtual-environment
+$ /path/to/python3 -m venv ../venv
 $ source ../venv/bin/activate
 (venv) $ pip install pip-tools
 (venv) $ pip-compile ./config/requirements/requirements_base.in
