@@ -53,23 +53,22 @@ That's it!
 
 # Stuff to try
 
-Open a browser to <http://127.0.0.1:8000/>. That'll redirect to <http://127.0.0.1:8000/info/>. 
+- Open a browser to <http://127.0.0.1:8000/>. That'll redirect to <http://127.0.0.1:8000/info/>. 
 
-Try adding `?format=json` to the info url to see the data feeding the the template.
+- Try adding `?format=json` to the info url to see the data feeding the the template.
 
-Try <http://127.0.0.1:8000/error_check/>. You'll see the intentionally-raised error in the browser (would result in a `404` on production), but if you want to confirm that this really would send an email, open another terminal window and type:
+- Try <http://127.0.0.1:8000/error_check/>. You'll see the intentionally-raised error in the browser (would result in a `404` on production), but if you want to confirm that this really would send an email, open another terminal window and type:
+    ```bash
+    $ python3 -m smtpd -n -c DebuggingServer localhost:1026
+    ```
 
-```bash
-$ python3 -m smtpd -n -c DebuggingServer localhost:1026
-```
+    You won't initially see anything, but if you reload the error-check url, and then check this terminal window again, you'll see the email-data that would have been sent.
 
-You won't initially see anything, but if you reload the error-check url, and then check this terminal window again, you'll see the email-data that would have been sent.
+- Try <http://127.0.0.1:8000/version/>. Once you `git init`, `git add --all`, and `git commit -am "initial commit"`, it'll show the branch and commit -- super-handy for dev and prod confirmations.
 
-Trry <http://127.0.0.1:8000/version/>. Once you `git init`, `git add --all`, and `git commit -am "initial commit"`, it'll show the branch and commit -- super-handy for dev and prod confirmations.
+- Try `(venv) $ python ./manage.py test`. There are two simple tests that should pass. (Requires venv to be sourced.)
 
-Try `(venv) $ python ./manage.py test`. There are two simple tests that should pass. (Requires venv to be sourced.)
-
-Check out the logs (`project_stuff/logs/`). The envar log-level is `DEBUG`, easily changed. On the servers that should be `INFO` or higher, and remember to rotate them, not via python's log-rotate -- but by the server's log-rotate.
+- Check out the logs (`project_stuff/logs/`). The envar log-level is `DEBUG`, easily changed. On the servers that should be `INFO` or higher, and remember to rotate them, not via python's log-rotate -- but by the server's log-rotate.
 
 Next -- well, the sky's the limit!
 
