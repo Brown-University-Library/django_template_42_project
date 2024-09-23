@@ -22,7 +22,7 @@ class ErrorCheckTest( TestCase ):
             response = self.client.get( '/error_check/' )
         except Exception as e:
             log.debug( f'e, ``{repr(e)}``' )
-            self.assertEqual( "Raising intentional exception to check email-admins-on-error functionality.')", repr(e) )
+            self.assertEqual( "Exception('Raising intentional exception to check email-admins-on-error functionality.')", repr(e) )
 
     def test_prod_errorcheck(self):
         """ Checks that production error_check url returns 404. """

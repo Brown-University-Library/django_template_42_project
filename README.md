@@ -67,7 +67,7 @@ You won't initially see anything, but if you reload the error-check url, and the
 
 Trry <http://127.0.0.1:8000/version/>. Once you `git init`, `git add --all`, and `git commit -am "initial commit"`, it'll show the branch and commit -- super-handy for dev and prod confirmations.
 
-Try `(venv) $ python ./manage.py test`. There are two simple tests that should pass.
+Try `(venv) $ python ./manage.py test`. There are two simple tests that should pass. (Requires venv to be sourced.)
 
 Check out the logs (`project_stuff/logs/`). The envar log-level is `DEBUG`, easily changed. On the servers that should be `INFO` or higher, and remember to rotate them, not via python's log-rotate -- but by the server's log-rotate.
 
