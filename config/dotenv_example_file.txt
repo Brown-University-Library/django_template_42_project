@@ -62,13 +62,13 @@ CACHES_JSON='
 ## app
 ## ============================================================================
 
-## the envars below aren't used in this template, but are commonly used in our apps
+## the envars below aren't currently used in this template, but are commonly used in our apps
 
 README_URL="https://github.com/birkin/django_template_42_project/blob/main/README.md"
 
 ## for localhost shib-testing
 TEST_META_DCT_JSON='{
-  "shib-eppn-key": "eppn@brown.edu",
+  "shib-eppn-key": "eppn@domain.edu",
   "shib-joinedname-key": "First_Last",
   "shib-email-key": "first_last@domain.edu",
   "shib-firstname-key": "First",
