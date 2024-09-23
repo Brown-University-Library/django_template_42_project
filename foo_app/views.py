@@ -22,7 +22,10 @@ def info( request ):
         Can get here from 'info' url, and the root-url redirects here. """
     log.debug( 'starting info()' )
     ## prep data ----------------------------------------------------
-    context = { 'message': 'Hello, world.' }
+    # context = { 'message': 'Hello, world.' }
+    context = { 
+            'quote': 'The best life is the one in which the creative impulses play the largest part and the possessive impulses the smallest.',
+            'author': 'Bertrand Russell' }
     ## prep response ------------------------------------------------
     if request.GET.get( 'format', '' ) == 'json':
         log.debug( 'building json response' )

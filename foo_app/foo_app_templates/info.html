@@ -20,13 +20,21 @@
             box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.1);
             width: 80%;
             max-width: 37.5rem;
-            margin: calc(100vh / 3) auto 0 auto;
+            margin: calc(100vh / 4) auto 0 auto;
+        }
+        .parenthetical {
+            font-size: 0.75rem;
+            color: #666;
+            margin-top: 2rem;
+            font-style: italic;
         }
     </style>
 </head>
 <body>
     <main class="container">
-        <h1>{{ message }}</h1>
+        <h1>“{{ quote }}”</h1>
+        <h1>— {{ author }}</h1>
+        <p class="parenthetical">(Add "?format=json" to this url to see the data sent to the page.)</p>
     </main>
 </body>
 </html>
