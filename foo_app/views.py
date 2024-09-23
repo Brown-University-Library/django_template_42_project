@@ -17,11 +17,20 @@ log = logging.getLogger(__name__)
 # -------------------------------------------------------------------
 
 
-def info(request):
+def info( request ):
     """ The "about" view. 
         Can get here from 'info' url, and the root-url redirects here. """
     log.debug( 'starting info()' )
-    return HttpResponse( "Hello, world." )
+    ## prep data ----------------------------------------------------
+    context = { 'message': 'Hello, world.' }
+    ## prep response ------------------------------------------------
+    if request.GET.get( 'format', '' ) == 'json':
+        log.debug( 'building json response' )
+        resp = HttpResponse( json.dumps(context, sort_keys=True, indent=2), content_type='application/json; charset=utf-8' )
+    else:
+        log.debug( 'building template response' )
+        resp = render( request, 'info.html', context )
+    return resp
 
 
 # -------------------------------------------------------------------
