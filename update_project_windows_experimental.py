@@ -89,7 +89,7 @@ def handle_remove_readonly( func: Callable, path: str, exc_info: Tuple ) -> None
             path: The path to the file or directory that couldn't be removed.
             exc_info: sys.exc_info() info of exception type, value, and traceback.
         What's going on here...
-        - This function handles a situation that, in testing, seems to appear on only on Windows.
+        - This function handles a situation that, in testing, seems to appear on Windows.
         - My understanding is that git may set some config or metadata files within the `.git` directory 
           to be marked as read-only. These read-only files are handled differently in Windows than in a unix-like system,
           and may prevent the `.git` directory from being deleted until these read-only files are handled.
