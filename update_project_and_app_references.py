@@ -3,7 +3,7 @@ Purpose:
 - Renames all project and app references from foo_project and foo_app to the desired project and app names.
 
 Usage:
-$ python ./update_project_and_app_references.py --target_dir "/path/to/foo_project/" --new_project_name bar_project --new_app_name bar_app 
+$ python ./update_project_and_app_references.py --target_dir "/path/to/foo_project/" --new_project_name "bar_project" --new_app_name "bar_app" 
 
 Note: 
 - This script will delete the git-cloned `.git` directory in the target directory, so you can start a new git repository.
