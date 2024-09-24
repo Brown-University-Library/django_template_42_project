@@ -3,14 +3,15 @@ Purpose:
 - Renames all project and app references from foo_project and foo_app to the desired project and app names.
 
 Usage:
-$ python ./update_project_and_app_references.py --target_dir "/path/to/foo_project/" --new_project_name "bar_project" --new_app_name "bar_app"
+$ python ./update_project_and_app_references.py --target_dir "/path/to/foo_project/" --new_project_name "bar_project" --new_app_name "bar_app" 
 
 Note: 
 - This script will delete the git-cloned `.git` directory in the target directory, so you can start a new git repository.
 """
 
-import argparse, shutil
-from pathlib import Path, PosixPath
+import argparse, os, shutil, stat, traceback
+from pathlib import Path, PosixPath, WindowsPath
+from typing import Callable, Tuple
 
 
 ## constants --------------------------------------------------------
@@ -39,8 +40,8 @@ def rename_top_level_directory( target_directory: Path, new_project_name: str ) 
 def rename_files_and_directories( target_directory: Path, new_project_name: str, new_app_name: str ) -> None:
     """ Renames any files and directories in the target directory. 
         Called by run_updater. """
-    for item in target_directory.rglob( '*' ):
-        assert type(item) == PosixPath
+    for item in target_directory.rglob('*'):
+        assert isinstance(item, (PosixPath, WindowsPath)), f"Unexpected path type: {type(item)}"
         if item.is_dir():
             if OLD_PROJECT_NAME in item.name:
                 new_dir_name: str = item.name.replace( OLD_PROJECT_NAME, new_project_name )
@@ -59,7 +60,7 @@ def rename_files_and_directories( target_directory: Path, new_project_name: str,
 
 def update_file_contents( target_directory: Path, new_project_name: str, new_app_name: str ) -> None:
     for item in target_directory.rglob( '*' ):
-        assert type(item) == PosixPath
+        assert isinstance(item, (PosixPath, WindowsPath)), f"Unexpected path type: {type(item)}"
         if item.is_file():
             if item.name == 'update_project_and_app_references.py':
                 continue
@@ -80,13 +81,40 @@ def replace_in_file( file_path: Path, old_text: str, new_text: str ) -> None:
     return
 
 
+def handle_remove_readonly( func: Callable, path: str, exc_info: Tuple ) -> None:
+    """ Handles removing read-only files. 
+        Called by delete_git_directory().
+        Parameters:
+            func: The function that raised the exception (e.g., `os.remove` or `os.rmdir`).
+            path: The path to the file or directory that couldn't be removed.
+            exc_info: sys.exc_info() info of exception type, value, and traceback.
+        What's going on here...
+        - This function handles a situation that, in testing, seems to appear on only on Windows.
+        - My understanding is that git may set some config or metadata files within the `.git` directory 
+          to be marked as read-only. These read-only files are handled differently in Windows than in a unix-like system,
+          and may prevent the `.git` directory from being deleted until these read-only files are handled.
+        - Only the `path` parameter is used, but shutil.rmtree() sends all three params if there's an error.
+    """
+    try:    
+        os.chmod(path, stat.S_IWRITE)
+        func(path)
+    except Exception as e:  
+        ## to help clarify the original vs subsequent exceptions
+        original_exception = ''.join( traceback.format_exception( *exc_info) )
+        retry_exception = ''.join( traceback.format_exception_only(type(e), e) )
+        print (f'Failed to delete ``{path}`` after changing permissions.' )
+        print( f'Original exception, ``{original_exception}``' )
+        print( f'Exception during retry, ``{retry_exception}``' )
+        raise
+
+
 def delete_git_directory(target_directory: Path) -> None:
     """ Deletes the .git directory in the target directory if it exists. 
         Called by run_updater. """
     git_dir: Path = target_directory / '.git'
     if git_dir.exists():
         if git_dir.is_dir():
-            shutil.rmtree(git_dir)
+            shutil.rmtree( git_dir, onerror=handle_remove_readonly )
             print( f'Deleted .git directory in ``{target_directory}``.' )
     else:
         print( f'No .git directory found at ``{git_dir}``.' )
