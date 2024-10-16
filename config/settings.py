@@ -147,6 +147,9 @@ EMAIL_PORT = int( os.environ['EMAIL_PORT'] )
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+## reminder: 
+## "Each 'logger' will pass messages above its log-level to its associated 'handlers', 
+## ...which will then output messages above the handler's own log-level."
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
@@ -163,7 +166,7 @@ LOGGING = {
             'include_html': True,
         },
         'logfile': {
-            'level':'DEBUG',
+            'level': os.environ.get( 'LOG_LEVEL', 'INFO' ),  # add LOG_LEVEL=DEBUG to the .env file to see debug messages
             'class':'logging.FileHandler',  # note: configure server to use system's log-rotate to avoid permissions issues
             'filename': os.environ['LOG_PATH'],
             'formatter': 'standard',
@@ -182,7 +185,7 @@ LOGGING = {
         },
         'foo_app': {
             'handlers': ['logfile'],
-            'level': os.environ['LOG_LEVEL'],
+            'level': 'DEBUG',  # messages above this will get sent to the `logfile` handler
             'propagate': False
         },
         # 'django.db.backends': {  # re-enable to check sql-queries! <https://docs.djangoproject.com/en/4.2/ref/logging/#django-db-backends>
