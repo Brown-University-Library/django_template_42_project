@@ -8,7 +8,32 @@ log = logging.getLogger(__name__)
 
 def make_context( request, rq_now, info_txt ):
     """ Assembles data-dct.
-        Called by views.version() """
+        Called by views.version() 
+
+        Example:
+        >>> from datetime import datetime
+        >>> class Request:
+        ...     scheme = 'http'
+        ...     META = {
+        ...         'HTTP_HOST': 'example.com',
+        ...         'REQUEST_URI': '/api/v1/resource',
+        ...         'PATH_INFO': '/api/v1/resource',
+        ...         'REMOTE_ADDR': '192.168.1.1'
+        ...     }
+        >>> request = Request()
+        >>> rq_now = datetime(2023, 10, 1, 12, 0, 0)
+        >>> info_txt = '1.0.0'
+        >>> context = make_context(request, rq_now, info_txt)
+        >>> context['request']['url']
+        'http://example.com/api/v1/resource'
+        >>> context['request']['timestamp']
+        '2023-10-01 12:00:00z'
+        >>> context['response']['ip']
+        '192.168.1.1z'
+        >>> context['response']['version']
+        '1.0.0'
+    """
+                
     context = {
         'request': {
         'url': '%s://%s%s' % (

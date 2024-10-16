@@ -10,6 +10,34 @@ log = logging.getLogger(__name__)
 TestCase.maxDiff = 1000
 
 
+import doctest, unittest            # python built-in modules
+from typing import Optional         # python built-in module
+from foo_app.lib import bar, baz    # local modules
+
+def load_tests( 
+        loader: unittest.TestLoader, 
+        tests: unittest.TestSuite,
+        pattern: Optional[str]
+        ):
+    """
+    load_tests() info...
+        Django's test runner is built on top of Python's unittest framework. 
+        When running `python ./manage.py test`, Django uses unittest to discover and run tests.
+        The load_tests() function is a special hook used by Python's unittest framework. 
+        When the test runner is discovering tests, it looks for the load_tests() function in your test modules. 
+        The `loader` and `pattern` arguments, not used here, offer options for customizing the test loading process.
+        The `tests` argument is a TestSuite object containing the tests unittest has found.
+    """
+    tests.addTests( doctest.DocTestSuite(bar) )
+    tests.addTests( doctest.DocTestSuite(baz) )
+    return tests
+
+
+
+
+
+
+
 class ErrorCheckTest( TestCase ):
     """ Checks urls. """
 
