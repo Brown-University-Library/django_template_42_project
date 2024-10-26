@@ -12,7 +12,8 @@ log = logging.getLogger(__name__)
 def make_context(request, rq_now, info_txt):
     """
     Assembles data-dct.
-    Called by views.version()"""
+    Called by views.version()
+    """
     context = {
         'request': {
             'url': '%s://%s%s'
