@@ -10,7 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
-import json, logging, os
+import json
+import logging
+import os
 import pathlib
 from dotenv import load_dotenv, find_dotenv
 

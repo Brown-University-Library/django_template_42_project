@@ -1,4 +1,6 @@
-import datetime, json, logging
+import datetime
+import json
+import logging
 
 import trio
 from django.conf import settings as project_settings
@@ -49,7 +51,7 @@ def error_check( request ):
     """
     log.debug( 'starting error_check()' )
     log.debug( f'project_settings.DEBUG, ``{project_settings.DEBUG}``' )
-    if project_settings.DEBUG == True:  # localdev and dev-server; never production
+    if project_settings.DEBUG is True:  # localdev and dev-server; never production
         log.debug( 'triggering exception' )
         raise Exception( 'Raising intentional exception to check email-admins-on-error functionality.' )
     else:

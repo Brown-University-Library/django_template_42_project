@@ -1,4 +1,4 @@
-import json, logging
+import logging
 
 from django.conf import settings as project_settings
 # from django.test import TestCase                  # TestCase requires db
@@ -19,7 +19,7 @@ class ErrorCheckTest( TestCase ):
         log.debug( f'debug, ``{project_settings.DEBUG}``' )
         try:
             log.debug( 'about to initiate client.get()' )
-            response = self.client.get( '/error_check/' )
+            self.client.get( '/error_check/' )
         except Exception as e:
             log.debug( f'e, ``{repr(e)}``' )
             self.assertEqual( "Exception('Raising intentional exception to check email-admins-on-error functionality.')", repr(e) )

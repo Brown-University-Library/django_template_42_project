@@ -9,7 +9,8 @@ Note:
 - This script will delete the git-cloned `.git` directory in the target directory, so you can start a new git repository.
 """
 
-import argparse, shutil
+import argparse
+import shutil
 from pathlib import Path, PosixPath
 
 
@@ -40,7 +41,7 @@ def rename_files_and_directories( target_directory: Path, new_project_name: str,
     """ Renames any files and directories in the target directory. 
         Called by run_updater. """
     for item in target_directory.rglob( '*' ):
-        assert type(item) == PosixPath
+        assert type(item) is PosixPath
         if item.is_dir():
             if OLD_PROJECT_NAME in item.name:
                 new_dir_name: str = item.name.replace( OLD_PROJECT_NAME, new_project_name )
@@ -59,7 +60,7 @@ def rename_files_and_directories( target_directory: Path, new_project_name: str,
 
 def update_file_contents( target_directory: Path, new_project_name: str, new_app_name: str ) -> None:
     for item in target_directory.rglob( '*' ):
-        assert type(item) == PosixPath
+        assert type(item) is PosixPath
         if item.is_file():
             if item.name == 'update_project_and_app_references.py':
                 continue

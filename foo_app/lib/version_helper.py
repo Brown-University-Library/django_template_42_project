@@ -1,4 +1,7 @@
-import datetime, json, logging, os, pathlib, pprint, subprocess
+import datetime
+import logging
+import pathlib
+import pprint
 
 import trio
 from django.conf import settings
@@ -73,7 +76,7 @@ class GatherCommitAndBranchData:
         except FileNotFoundError:
             log.error( 'no `.git` directory or HEAD file found.' )
             commit = 'commit_not_found'
-        except Exception as e:
+        except Exception:
             log.exception( 'other problem fetching commit data' )
             commit = 'commit_not_found'
         log.debug( f'commit, ``{commit}``' )
@@ -97,7 +100,7 @@ class GatherCommitAndBranchData:
         except FileNotFoundError:
             log.error( 'no `.git` directory or HEAD file found.' )
             branch = 'branch_not_found'
-        except Exception as e:
+        except Exception:
             log.exception( 'other problem fetching branch data')
             branch = 'branch_not_found'
         ## update holder --------------------------------------------
