@@ -20,10 +20,7 @@ from dotenv import load_dotenv, find_dotenv
 ## load envars ------------------------------------------------------
 dotenv_path = pathlib.Path(__file__).resolve().parent.parent.parent / '.env'
 assert dotenv_path.exists(), f'file does not exist, ``{dotenv_path}``'
-load_dotenv( 
-    find_dotenv( str(dotenv_path), raise_error_if_not_found=True ), 
-    override=True 
-    )
+load_dotenv(find_dotenv(str(dotenv_path), raise_error_if_not_found=True), override=True)
 
 
 log = logging.getLogger(__name__)
@@ -41,16 +38,16 @@ BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = 'django-insecure-3ory+ty87_wq8-21ki6d&a+x=z9_$2m(gr4@vxri@@^g7u!*oc'
-SECRET_KEY = os.environ[ 'SECRET_KEY' ]
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
-DEBUG = json.loads( os.environ['DEBUG_JSON'] )
+DEBUG = json.loads(os.environ['DEBUG_JSON'])
 
-ADMINS = json.loads( os.environ['ADMINS_JSON'] )
+ADMINS = json.loads(os.environ['ADMINS_JSON'])
 
-ALLOWED_HOSTS = json.loads( os.environ['ALLOWED_HOSTS_JSON'] )
-CSRF_TRUSTED_ORIGINS = json.loads( os.environ['CSRF_TRUSTED_ORIGINS_JSON'] )    
+ALLOWED_HOSTS = json.loads(os.environ['ALLOWED_HOSTS_JSON'])
+CSRF_TRUSTED_ORIGINS = json.loads(os.environ['CSRF_TRUSTED_ORIGINS_JSON'])
 
 # Application definition
 
@@ -79,7 +76,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         # 'DIRS': [ '%s/foo_app' % BASE_DIR ],
-        'DIRS': [ f'{BASE_DIR}/foo_app/foo_app_templates' ],
+        'DIRS': [f'{BASE_DIR}/foo_app/foo_app_templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -97,7 +94,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-DATABASES = json.loads( os.environ['DATABASES_JSON'] )
+DATABASES = json.loads(os.environ['DATABASES_JSON'])
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -141,7 +138,7 @@ STATIC_ROOT = os.environ['STATIC_ROOT']  # needed for collectstatic command
 # Email
 SERVER_EMAIL = os.environ['SERVER_EMAIL']
 EMAIL_HOST = os.environ['EMAIL_HOST']
-EMAIL_PORT = int( os.environ['EMAIL_PORT'] )
+EMAIL_PORT = int(os.environ['EMAIL_PORT'])
 
 
 # Default primary key field type
@@ -149,16 +146,16 @@ EMAIL_PORT = int( os.environ['EMAIL_PORT'] )
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-## reminder: 
-## "Each 'logger' will pass messages above its log-level to its associated 'handlers', 
+## reminder:
+## "Each 'logger' will pass messages above its log-level to its associated 'handlers',
 ## ...which will then output messages above the handler's own log-level."
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
     'formatters': {
         'standard': {
-            'format': "[%(asctime)s] %(levelname)s [%(module)s-%(funcName)s()::%(lineno)d] %(message)s",
-            'datefmt': "%d/%b/%Y %H:%M:%S"
+            'format': '[%(asctime)s] %(levelname)s [%(module)s-%(funcName)s()::%(lineno)d] %(message)s',
+            'datefmt': '%d/%b/%Y %H:%M:%S',
         },
     },
     'handlers': {
@@ -168,15 +165,17 @@ LOGGING = {
             'include_html': True,
         },
         'logfile': {
-            'level': os.environ.get( 'LOG_LEVEL', 'INFO' ),  # add LOG_LEVEL=DEBUG to the .env file to see debug messages
-            'class':'logging.FileHandler',  # note: configure server to use system's log-rotate to avoid permissions issues
+            'level': os.environ.get(
+                'LOG_LEVEL', 'INFO'
+            ),  # add LOG_LEVEL=DEBUG to the .env file to see debug messages
+            'class': 'logging.FileHandler',  # note: configure server to use system's log-rotate to avoid permissions issues
             'filename': os.environ['LOG_PATH'],
             'formatter': 'standard',
         },
-        'console':{
-            'level':'DEBUG',
-            'class':'logging.StreamHandler',
-            'formatter': 'standard'
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'standard',
         },
     },
     'loggers': {
@@ -188,12 +187,12 @@ LOGGING = {
         'foo_app': {
             'handlers': ['logfile'],
             'level': 'DEBUG',  # messages above this will get sent to the `logfile` handler
-            'propagate': False
+            'propagate': False,
         },
         # 'django.db.backends': {  # re-enable to check sql-queries! <https://docs.djangoproject.com/en/4.2/ref/logging/#django-db-backends>
         #     'handlers': ['logfile'],
         #     'level': os.environ['LOG_LEVEL'],
         #     'propagate': False
         # },
-    }
+    },
 }
