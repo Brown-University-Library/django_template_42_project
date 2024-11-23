@@ -1,7 +1,7 @@
 ## <https://peps.python.org/pep-0723/> recently adopted python standard.
 ## Allows, for development, to run the app via `uv run ./manage.py runserver`, with no venv.
 # /// script
-# requires-python = "~=3.8.0,<3.9"
+# requires-python = "~=3.8.0"
 # dependencies = [
 #     "django~=4.2.0",
 #     "python-dotenv~=1.0.0",
@@ -16,6 +16,8 @@
 
 import os
 import sys
+
+import django  # for the "in case you're curious about versions" code
 
 
 def main():
@@ -33,4 +35,10 @@ def main():
 
 
 if __name__ == '__main__':
+    ## in case you're curious about versions -- feel free to comment out
+    if os.environ.get('RUN_MAIN') != 'true':
+        major, minor, micro = sys.version_info[:3]
+        print(f'using python version, ``{major}.{minor}.{micro}``')
+        print(f'using django version, ``{django.get_version()}``')
+
     main()
