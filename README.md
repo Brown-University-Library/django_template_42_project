@@ -12,6 +12,7 @@ Notes about the install instructions...
 - The install-instructions below assume:
     - a unix-like environment (ie Mac, Linux, or Windows Subsystem for Linux (WSL)). 
     - you've installed `uv` ([link][uv_link])
+        - For now, here's a link to an [older version][old] of the repo that uses `pip`-based setup instructions. When improvements are made to this repo, this link will be removed.
 - The install-instructions below reference `x_project_stuff`, `x_project`, and `x_app`. In all cases replace with the name of your project, like: `isbn_api_project_stuff`, `isbn_api_project`, and `isbn_api_app`.
 - The `update_project_and_app_references.py` script ([link](https://github.com/Brown-University-Library/django_template_42_project/blob/main/update_project_and_app_references.py)) deletes the cloned `.git` directory (in addition to its main purpose to rename the project). Why? So you don't accidentally start building away and commit to the template repo. After this installation, creating a new git repo is one of the first things you should do.
 - When you start the webapp via `runserver`, you'll get a message that there are migrations that need to be run, with instructions. You can go ahead and do that, or do it later.
@@ -40,6 +41,7 @@ $ uv run ./manage.py runserver
 That's it!
 
 [uv_link]: <https://docs.astral.sh/uv/getting-started/installation/>
+[old]: <https://github.com/Brown-University-Library/django_template_42_project/tree/56b0bc3bc2211e50c418dbed7b588c2092dcc9e5>
 
 ---
 
