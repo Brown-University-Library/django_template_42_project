@@ -39,7 +39,7 @@ $ uv run ./manage.py runserver
 
 That's it!
 
-[uv_link]: <https://docs.astral.sh/uv/>
+[uv_link]: <https://docs.astral.sh/uv/getting-started/installation/>
 
 ---
 
