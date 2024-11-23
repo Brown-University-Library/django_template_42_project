@@ -2,19 +2,28 @@
 
 This is a template for new django projects -- to standardize on some nice features/practices, and to get up and running, locally, easily and quickly. It provides instructions for getting the code from GitHub, installing it, setting up a virtual environment, and lists a few things to try after getting the webapp running. Finally, it lists the nice features/practices.
 
+on this page...
+- [local quick-start](#local-quick-start)
+- [stuff to try](#stuff-to-try)
+- [nice features/practices](#nice-featurespractices)
+- [regular setup](#regular-setup)
+
 --- 
 
 
-# local-install
+# local quick-start
 
-Notes about the install instructions...
+Notes about the quick-start instructions...
 
-- The install-instructions below assume:
+- The instructions below assume:
     - a unix-like environment (ie Mac, Linux, or Windows Subsystem for Linux (WSL)). 
     - you've installed `uv` ([link][uv_link])
         - For now, here's a link to an [older version][old] of the repo that uses `pip`-based setup instructions. When improvements are made to this repo, this link will be removed.
-- The install-instructions below reference `x_project_stuff`, `x_project`, and `x_app`. In all cases replace with the name of your project, like: `isbn_api_project_stuff`, `isbn_api_project`, and `isbn_api_app`.
+
+- The instructions below reference `x_project_stuff`, `x_project`, and `x_app`. In all cases replace with the name of your project, like: `isbn_api_project_stuff`, `isbn_api_project`, and `isbn_api_app`.
+
 - The `update_project_and_app_references.py` script ([link](https://github.com/Brown-University-Library/django_template_42_project/blob/main/update_project_and_app_references.py)) deletes the cloned `.git` directory (in addition to its main purpose to rename the project). Why? So you don't accidentally start building away and commit to the template repo. After this installation, creating a new git repo is one of the first things you should do.
+
 - When you start the webapp via `runserver`, you'll get a message that there are migrations that need to be run, with instructions. You can go ahead and do that, or do it later.
 
 ```bash
@@ -45,6 +54,7 @@ That's it!
 
 ---
 
+
 # stuff to try
 
 - Open a browser to <http://127.0.0.1:8000/>. That'll redirect to <http://127.0.0.1:8000/info/>. 
@@ -58,7 +68,7 @@ That's it!
 
     You won't initially see anything, but if you reload the error-check url, and then check this terminal window again, you'll see the email-data that would have been sent.
 
-- Try <http://127.0.0.1:8000/version/>. Once you `git init`, `git add --all`, and `git commit -am "initial commit"`, it'll show the branch and commit -- super-handy for dev and prod confirmations.
+- Try <http://127.0.0.1:8000/version/>. Once you `git init`, `git add --all`, and `git commit -am "initial commit"`, it'll show the branch and commit -- _very_ handy for dev and prod confirmations.
 
 - Try `$ uv run ./manage.py test`. There are two simple tests that should pass.
 
@@ -88,7 +98,26 @@ Next -- well, the sky's the limit!
 ---
 
 
-# regular `uv` install
+# regular setup
 
-- The `local-install` instructions above are just to get you up-and-running super quickly and easily. Here are some more typical _local_ uv-install instructions (assumes you've already followed the `local-install` instructions):
-    - 
+The `local quick-start` instructions above are to get you up-and-running super quickly and easily. Below are instructions for a more typical local virtual-environment architecture (they assume you've already followed the `local quick-start` instructions).
+
+Make the venv...
+
+```bash
+$ cd ./x_project_stuff/
+$ uv venv ./your_venv --python 3.8.10
+$ cd ./x_project
+$ source ../your_venv/bin/activate
+(your_venv) $ uv pip sync ./config/requirements/requirements_base.txt
+```
+
+That's a one-time setup. For regular use...
+
+```bash
+$ cd ./x_project_stuff/x_project
+$ source ../your_venv/bin/activate
+(your_venv) $ python ./manage.py runserver
+```
+
+---
