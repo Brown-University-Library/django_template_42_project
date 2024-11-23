@@ -17,6 +17,8 @@
 import os
 import sys
 
+import django  # for the "in case you're curious about versions" code
+
 
 def main():
     """Run administrative tasks."""
@@ -33,4 +35,10 @@ def main():
 
 
 if __name__ == '__main__':
+    ## in case you're curious about versions -- feel free to comment out
+    if os.environ.get('RUN_MAIN') != 'true':
+        major, minor, micro = sys.version_info[:3]
+        print(f'using python version, ``{major}.{minor}.{micro}``')
+        print(f'using django version, ``{django.get_version()}``')
+
     main()
