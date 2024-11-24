@@ -33,7 +33,7 @@ DATABASES_JSON='
     '
 
 STATIC_URL="/static/"
-STATIC_ROOT="/static/"
+STATIC_ROOT="/path/to/some/apache-served/html/dir/"  # used by collectstatic; not used by runserver.
 
 SERVER_EMAIL="donotreply_foo-project@domain.edu"
 EMAIL_HOST="localhost"

@@ -1,10 +1,16 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Information Page - {{ message }}</title>
+    <title>Information Page</title>
     <meta name="description" content="Detailed information about {{ topic }}.">
+    <!-- call styles.css via django `static` template-tag -->
+    <link rel="stylesheet" href="{% static 'foo_app/css/styles.css' %}">
+    <!-- CSS _could_ be inserted directly like this, but the above approach is more common -->
+    <!-- 
     <style>
         body {
             font-family: 'Trebuchet MS', sans-serif;
@@ -28,7 +34,8 @@
             margin-top: 2rem;
             font-style: italic;
         }
-    </style>
+    </style> 
+    -->
 </head>
 <body>
     <main class="container">

@@ -18,7 +18,6 @@ Notes about the quick-start instructions...
 - The instructions below assume:
     - a unix-like environment (ie Mac, Linux, or Windows Subsystem for Linux (WSL)). 
     - you've installed `uv` ([link][uv_link])
-        - _For now, here's a link to an [older version][old] of the repo that uses `pip`-based setup instructions. When improvements are made to this repo, this link will be removed._
 
 - The instructions below reference `x_project_stuff`, `x_project`, and `x_app`. In all cases replace with the name of your project, like: `isbn_api_project_stuff`, `isbn_api_project`, and `isbn_api_app`.
 

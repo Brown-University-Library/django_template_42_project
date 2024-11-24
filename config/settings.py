@@ -14,8 +14,8 @@ import json
 import logging
 import os
 import pathlib
-from dotenv import load_dotenv, find_dotenv
 
+from dotenv import find_dotenv, load_dotenv
 
 ## load envars ------------------------------------------------------
 dotenv_path = pathlib.Path(__file__).resolve().parent.parent.parent / '.env'
@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'foo_app',
 ]
 
 MIDDLEWARE = [
@@ -165,9 +166,7 @@ LOGGING = {
             'include_html': True,
         },
         'logfile': {
-            'level': os.environ.get(
-                'LOG_LEVEL', 'INFO'
-            ),  # add LOG_LEVEL=DEBUG to the .env file to see debug messages
+            'level': os.environ.get('LOG_LEVEL', 'INFO'),  # add LOG_LEVEL=DEBUG to the .env file to see debug messages
             'class': 'logging.FileHandler',  # note: configure server to use system's log-rotate to avoid permissions issues
             'filename': os.environ['LOG_PATH'],
             'formatter': 'standard',
