@@ -23,11 +23,11 @@ Notes about the quick-start instructions...
 
 - The `update_project_and_app_references.py` script ([link](https://github.com/Brown-University-Library/django_template_42_project/blob/main/update_project_and_app_references.py)) deletes the cloned `.git` directory (in addition to its main purpose to rename the project). Why? So you don't accidentally start building away and commit to the template repo. After this installation, creating a new git repo is one of the first things you should do.
 
-- When you start the webapp via `runserver`, you'll get a message that there are migrations that need to be run, with instructions. You can go ahead and do that, or do it later.
+- When you start the webapp via `runserver`, you'll get a message that there are migrations that need to be run, with instructions. You can do that later.
 
 ```bash
 ## setup directories
-$ mkdir ./x_project_stuff
+$ mkdir ./x_project_stuff  # again, replace `x_project_stuff` with your project-stuff directory name
 $ cd ./x_project_stuff/
 $ mkdir ./logs
 $ mkdir ./DBs
@@ -36,7 +36,7 @@ $ mkdir ./DBs
 $ git clone https://github.com/Brown-University-Library/django_template_42_project.git
 
 ## update project-name (line below is a single long line; clarifying in case it wraps)
-$ uv run --python 3.8 ./django_template_42_project/update_project_and_app_references.py --target_dir "./django_template_42_project/" --new_project_name "x_project" --new_app_name "x_app"  
+$ uv run --python 3.12 ./django_template_42_project/update_project_and_app_references.py --target_dir "./django_template_42_project/" --new_project_name "x_project" --new_app_name "x_app"  # again, replace `x_project` and `x_app` with your project and app names
 
 ## setup the envar-settings
 $ cd ./x_project/
@@ -46,10 +46,19 @@ $ cp ./config/dotenv_example_file.txt ../.env
 $ uv sync --upgrade
 
 ## run the app
-$ uv run ./manage.py runserver
+$ uv run ./manage.py runserver  # you can ignore the migration-message for now
 ```
 
 That's it!
+
+---
+
+About the migrations message... Migrations are Django’s system for managing changes to your database schema. When you do run the migrations, do it like this:
+
+```bash
+$ cd ./x_project_stuff/x_project/
+$ uv run ./manage.py migrate  # calling migrate this way auto-activates the venv
+```
 
 [uv_link]: <https://docs.astral.sh/uv/getting-started/installation/>
 [old]: <https://github.com/Brown-University-Library/django_template_42_project/tree/56b0bc3bc2211e50c418dbed7b588c2092dcc9e5>
@@ -63,7 +72,7 @@ After the above one-time setup, for ongoing development...
 
 ```bash
 $ cd ./x_project_stuff/x_project
-$ uv run ./manage.py runserver
+$ uv run ./manage.py runserver  # calling runserver this way auto-activates the venv
 ```
 
 ---
@@ -77,8 +86,10 @@ $ uv run ./manage.py runserver
 
 - Try <http://127.0.0.1:8000/error_check/>. You'll see the intentionally-raised error in the browser (would result in a `404` on production), but if you want to confirm that this really would send an email, open another terminal window and type:
     ```bash
-    $ python3 -m smtpd -n -c DebuggingServer localhost:1026
+    $ uv run --python 3.12 --with aiosmtpd -m aiosmtpd -n -c aiosmtpd.handlers.Debugging --listen localhost:1026
     ```
+
+    This runs an email server in debugging mode so that it'll print, to the console, all received emails, rather than delivering them.    
 
     You won't initially see anything, but if you reload the error-check url, and then check this terminal window again, you'll see the email-data that would have been sent.
 
